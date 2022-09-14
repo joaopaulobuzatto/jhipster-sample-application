@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Licenca.
+    -->
+    <changeSet id="20220914141908-1" author="jhipster">
+        <createTable tableName="licenca">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="codigo" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_criacao" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="data_inicio_utilizacao" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_inicio_faturamento" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_primeiro_vencimento_boleto" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="dia_vencimento_boleto" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="produtos_contratados" type="varchar(300)">
+                <constraints nullable="true" />
+            </column>
+            <column name="valores_negociados" type="varchar(300)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contratacao_bloqueio_ips" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="contratacao_email_proposta" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="criar_pedido" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="criar_negociacoes" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="sincronizar_dados_cadastro_cliente" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="sincronizar_dados_carteira_cliente" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="bloqueio_acesso" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="data_bloqueio_acesso" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="motivo_bloqueio_acesso" type="varchar(2500)">
+                <constraints nullable="true" />
+            </column>
+            <column name="mensagem_bloqueio_acesso" type="varchar(150)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pessoa_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="pessoa_responsavel_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="pessoa_financeiro_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="usuario_suporte_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="usuario_robo_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="filial_padrao_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="licenca" columnName="data_criacao" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="licenca" columnName="data_inicio_utilizacao" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="licenca" columnName="data_inicio_faturamento" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="licenca" columnName="data_primeiro_vencimento_boleto" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="licenca" columnName="data_bloqueio_acesso" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20220914141908-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/licenca.csv"
+                  separator=";"
+                  tableName="licenca"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="codigo" type="numeric"/>
+            <column name="data_criacao" type="date"/>
+            <column name="data_inicio_utilizacao" type="date"/>
+            <column name="data_inicio_faturamento" type="date"/>
+            <column name="data_primeiro_vencimento_boleto" type="date"/>
+            <column name="dia_vencimento_boleto" type="numeric"/>
+            <column name="produtos_contratados" type="string"/>
+            <column name="valores_negociados" type="string"/>
+            <column name="contratacao_bloqueio_ips" type="boolean"/>
+            <column name="contratacao_email_proposta" type="boolean"/>
+            <column name="criar_pedido" type="boolean"/>
+            <column name="criar_negociacoes" type="boolean"/>
+            <column name="sincronizar_dados_cadastro_cliente" type="boolean"/>
+            <column name="sincronizar_dados_carteira_cliente" type="boolean"/>
+            <column name="bloqueio_acesso" type="boolean"/>
+            <column name="data_bloqueio_acesso" type="date"/>
+            <column name="motivo_bloqueio_acesso" type="string"/>
+            <column name="mensagem_bloqueio_acesso" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

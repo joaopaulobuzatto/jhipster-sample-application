@@ -1,0 +1,123 @@
+entity Usuario {
+	codigo Long
+    dataCriacao Instant required
+    senha String maxlength(70) required
+    isAdmin Boolean required
+    isSuporte Boolean required
+    nomeExibicao String maxlength(70) required
+    isConsultor Boolean required
+    isSupervisor Boolean required
+    isAtivo Boolean required
+    isAdministrativo Boolean
+    receberEmails Boolean required
+    isEmailValido Boolean required
+    uuidEmail String maxlength(50)
+    email String maxlength(100) required
+    isExecutorSac Boolean required
+    liberarHorarioFeriado Boolean
+}
+
+entity Licenca {
+	codigo Long
+    dataCriacao Instant required
+    dataInicioUtilizacao Instant
+    dataInicioFaturamento Instant
+    dataPrimeiroVencimentoBoleto Instant
+    diaVencimentoBoleto Integer
+    produtosContratados String maxlength(300)
+    valoresNegociados String maxlength(300)
+    contratacaoBloqueioIps Boolean required
+    contratacaoEmailProposta Boolean required
+    criarPedido Boolean
+    criarNegociacoes Boolean
+    sincronizarDadosCadastroCliente Boolean
+    sincronizarDadosCarteiraCliente Boolean
+    bloqueioAcesso Boolean required
+    dataBloqueioAcesso Instant required
+    motivoBloqueioAcesso String maxlength(2500)
+    mensagemBloqueioAcesso String maxlength(150)
+}
+
+entity Endereco {
+	cep String maxlength(20)
+    logradouro String maxlength(100)
+    numero String maxlength(20)
+    bairro String maxlength(100)
+    complemento String maxlength(100)
+    pontoReferencia String maxlength(100)
+    cidade String maxlength(100)
+    uf String maxlength(2)
+}
+
+entity Pessoa {
+	email1 String maxlength(100)
+    telefone1 String maxlength(11)
+}
+
+entity PessoaFisica {
+	nomeCompleto String maxlength(100) required
+	cpf String maxlength(14)
+    rg String maxlength(15)
+    dataNascimento Instant
+}
+
+entity PessoaJuridica {
+	cnpj String maxlength(14)
+    razaoSocial String maxlength(200)
+    nomeFantasia String maxlength(200) required
+    codigoCnae String maxlength(50)
+    dataAbertura Instant
+    codigoCnaePrincipal String maxlength(50)
+    codigoNaturezaJuridica String maxlength(50)
+    quantidadeFuncionarios Integer
+}
+
+entity HorarioTrabalho {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(255) required
+}
+
+entity Origem {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    tipo TipoOrigem required
+}
+
+enum TipoOrigem {
+	CLIENTE, LEAD, MAILING
+}
+
+entity Filial {
+	dataCriacao Instant
+}
+
+relationship ManyToOne {
+	Usuario{licenca} to Licenca
+    Usuario{supervisor} to Usuario
+    Usuario{usuarioCriador} to Usuario
+    Usuario{pessoaFisica} to PessoaFisica
+    Usuario{horarioTrabalho} to HorarioTrabalho
+    Pessoa{licenca} to Licenca
+    PessoaFisica{pessoaFisicaLicenca} to Licenca
+    PessoaJuridica{pessoaJuridicaLicenca} to Licenca
+    HorarioTrabalho{licenca} to Licenca
+    HorarioTrabalho{usuarioCriador} to Usuario
+    Licenca{pessoa} to Pessoa
+    Licenca{pessoaResponsavel} to PessoaFisica
+    Licenca{pessoaFinanceiro} to PessoaFisica
+    Licenca{usuarioSuporte} to Usuario
+    Licenca{usuarioRobo} to Usuario
+    Licenca{filialPadrao} to Filial
+    Endereco{licenca} to Licenca
+    Origem{licenca} to Licenca
+    Origem{usuarioCriador} to Usuario
+    Filial{licenca} to Licenca
+    Filial{pessoa} to PessoaJuridica
+    Filial{usuarioCriador} to Usuario
+}
+
+relationship OneToOne {
+	Pessoa{endereco} to Endereco
+}

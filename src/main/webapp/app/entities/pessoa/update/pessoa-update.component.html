@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pessoa-heading" data-cy="PessoaCreateUpdateHeading">Create or edit a Pessoa</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_email1">Email 1</label>
+          <input type="text" class="form-control" name="email1" id="field_email1" data-cy="email1" formControlName="email1" />
+          <div *ngIf="editForm.get('email1')!.invalid && (editForm.get('email1')!.dirty || editForm.get('email1')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email1')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_telefone1">Telefone 1</label>
+          <input type="text" class="form-control" name="telefone1" id="field_telefone1" data-cy="telefone1" formControlName="telefone1" />
+          <div *ngIf="editForm.get('telefone1')!.invalid && (editForm.get('telefone1')!.dirty || editForm.get('telefone1')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('telefone1')?.errors?.maxlength">
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_endereco">Endereco</label>
+          <select
+            class="form-control"
+            id="field_endereco"
+            data-cy="endereco"
+            name="endereco"
+            formControlName="endereco"
+            [compareWith]="compareEndereco"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="enderecoOption" *ngFor="let enderecoOption of enderecosSharedCollection">{{ enderecoOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_licenca">Licenca</label>
+          <select
+            class="form-control"
+            id="field_licenca"
+            data-cy="licenca"
+            name="licenca"
+            formControlName="licenca"
+            [compareWith]="compareLicenca"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="licencaOption" *ngFor="let licencaOption of licencasSharedCollection">{{ licencaOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

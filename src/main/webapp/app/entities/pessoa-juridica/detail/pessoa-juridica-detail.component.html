@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pessoaJuridica">
+      <h2 data-cy="pessoaJuridicaDetailsHeading"><span>Pessoa Juridica</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.id }}</span>
+        </dd>
+        <dt><span>Cnpj</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.cnpj }}</span>
+        </dd>
+        <dt><span>Razao Social</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.razaoSocial }}</span>
+        </dd>
+        <dt><span>Nome Fantasia</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.nomeFantasia }}</span>
+        </dd>
+        <dt><span>Codigo Cnae</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.codigoCnae }}</span>
+        </dd>
+        <dt><span>Data Abertura</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.dataAbertura | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Codigo Cnae Principal</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.codigoCnaePrincipal }}</span>
+        </dd>
+        <dt><span>Codigo Natureza Juridica</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.codigoNaturezaJuridica }}</span>
+        </dd>
+        <dt><span>Quantidade Funcionarios</span></dt>
+        <dd>
+          <span>{{ pessoaJuridica.quantidadeFuncionarios }}</span>
+        </dd>
+        <dt><span>Pessoa Juridica Licenca</span></dt>
+        <dd>
+          <div *ngIf="pessoaJuridica.pessoaJuridicaLicenca">
+            <a [routerLink]="['/licenca', pessoaJuridica.pessoaJuridicaLicenca.id, 'view']">{{
+              pessoaJuridica.pessoaJuridicaLicenca.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pessoa-juridica', pessoaJuridica.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
