@@ -1,0 +1,273 @@
+<div>
+  <h2 id="page-heading" data-cy="LicencaHeading">
+    <span>Licencas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-licenca"
+        [routerLink]="['/licenca/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Licenca </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="licencas?.length === 0">
+    <span>No Licencas found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="licencas && licencas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigo">
+            <div class="d-flex">
+              <span>Codigo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataInicioUtilizacao">
+            <div class="d-flex">
+              <span>Data Inicio Utilizacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataInicioFaturamento">
+            <div class="d-flex">
+              <span>Data Inicio Faturamento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataPrimeiroVencimentoBoleto">
+            <div class="d-flex">
+              <span>Data Primeiro Vencimento Boleto</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="diaVencimentoBoleto">
+            <div class="d-flex">
+              <span>Dia Vencimento Boleto</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="produtosContratados">
+            <div class="d-flex">
+              <span>Produtos Contratados</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="valoresNegociados">
+            <div class="d-flex">
+              <span>Valores Negociados</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contratacaoBloqueioIps">
+            <div class="d-flex">
+              <span>Contratacao Bloqueio Ips</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contratacaoEmailProposta">
+            <div class="d-flex">
+              <span>Contratacao Email Proposta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="criarPedido">
+            <div class="d-flex">
+              <span>Criar Pedido</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="criarNegociacoes">
+            <div class="d-flex">
+              <span>Criar Negociacoes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sincronizarDadosCadastroCliente">
+            <div class="d-flex">
+              <span>Sincronizar Dados Cadastro Cliente</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sincronizarDadosCarteiraCliente">
+            <div class="d-flex">
+              <span>Sincronizar Dados Carteira Cliente</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="bloqueioAcesso">
+            <div class="d-flex">
+              <span>Bloqueio Acesso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataBloqueioAcesso">
+            <div class="d-flex">
+              <span>Data Bloqueio Acesso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="motivoBloqueioAcesso">
+            <div class="d-flex">
+              <span>Motivo Bloqueio Acesso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="mensagemBloqueioAcesso">
+            <div class="d-flex">
+              <span>Mensagem Bloqueio Acesso</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoa.id">
+            <div class="d-flex">
+              <span>Pessoa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoaResponsavel.id">
+            <div class="d-flex">
+              <span>Pessoa Responsavel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoaFinanceiro.id">
+            <div class="d-flex">
+              <span>Pessoa Financeiro</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioSuporte.id">
+            <div class="d-flex">
+              <span>Usuario Suporte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioRobo.id">
+            <div class="d-flex">
+              <span>Usuario Robo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="filialPadrao.id">
+            <div class="d-flex">
+              <span>Filial Padrao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let licenca of licencas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/licenca', licenca.id, 'view']">{{ licenca.id }}</a>
+          </td>
+          <td>{{ licenca.codigo }}</td>
+          <td>{{ licenca.dataCriacao | formatMediumDatetime }}</td>
+          <td>{{ licenca.dataInicioUtilizacao | formatMediumDatetime }}</td>
+          <td>{{ licenca.dataInicioFaturamento | formatMediumDatetime }}</td>
+          <td>{{ licenca.dataPrimeiroVencimentoBoleto | formatMediumDatetime }}</td>
+          <td>{{ licenca.diaVencimentoBoleto }}</td>
+          <td>{{ licenca.produtosContratados }}</td>
+          <td>{{ licenca.valoresNegociados }}</td>
+          <td>{{ licenca.contratacaoBloqueioIps }}</td>
+          <td>{{ licenca.contratacaoEmailProposta }}</td>
+          <td>{{ licenca.criarPedido }}</td>
+          <td>{{ licenca.criarNegociacoes }}</td>
+          <td>{{ licenca.sincronizarDadosCadastroCliente }}</td>
+          <td>{{ licenca.sincronizarDadosCarteiraCliente }}</td>
+          <td>{{ licenca.bloqueioAcesso }}</td>
+          <td>{{ licenca.dataBloqueioAcesso | formatMediumDatetime }}</td>
+          <td>{{ licenca.motivoBloqueioAcesso }}</td>
+          <td>{{ licenca.mensagemBloqueioAcesso }}</td>
+          <td>
+            <div *ngIf="licenca.pessoa">
+              <a [routerLink]="['/pessoa', licenca.pessoa.id, 'view']">{{ licenca.pessoa.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="licenca.pessoaResponsavel">
+              <a [routerLink]="['/pessoa-fisica', licenca.pessoaResponsavel.id, 'view']">{{ licenca.pessoaResponsavel.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="licenca.pessoaFinanceiro">
+              <a [routerLink]="['/pessoa-fisica', licenca.pessoaFinanceiro.id, 'view']">{{ licenca.pessoaFinanceiro.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="licenca.usuarioSuporte">
+              <a [routerLink]="['/usuario', licenca.usuarioSuporte.id, 'view']">{{ licenca.usuarioSuporte.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="licenca.usuarioRobo">
+              <a [routerLink]="['/usuario', licenca.usuarioRobo.id, 'view']">{{ licenca.usuarioRobo.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="licenca.filialPadrao">
+              <a [routerLink]="['/filial', licenca.filialPadrao.id, 'view']">{{ licenca.filialPadrao.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/licenca', licenca.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/licenca', licenca.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(licenca)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

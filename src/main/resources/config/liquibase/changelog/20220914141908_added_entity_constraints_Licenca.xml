@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Licenca.
+    -->
+    <changeSet id="20220914141908-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pessoa_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__pessoa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pessoa"/>
+
+        <addForeignKeyConstraint baseColumnNames="pessoa_responsavel_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__pessoa_responsavel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pessoa_fisica"/>
+
+        <addForeignKeyConstraint baseColumnNames="pessoa_financeiro_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__pessoa_financeiro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pessoa_fisica"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_suporte_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__usuario_suporte_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_robo_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__usuario_robo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="filial_padrao_id"
+                                 baseTableName="licenca"
+                                 constraintName="fk_licenca__filial_padrao_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="filial"/>
+    </changeSet>
+</databaseChangeLog>

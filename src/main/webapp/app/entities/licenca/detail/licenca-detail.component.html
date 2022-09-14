@@ -1,0 +1,136 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="licenca">
+      <h2 data-cy="licencaDetailsHeading"><span>Licenca</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ licenca.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ licenca.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ licenca.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Inicio Utilizacao</span></dt>
+        <dd>
+          <span>{{ licenca.dataInicioUtilizacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Inicio Faturamento</span></dt>
+        <dd>
+          <span>{{ licenca.dataInicioFaturamento | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data Primeiro Vencimento Boleto</span></dt>
+        <dd>
+          <span>{{ licenca.dataPrimeiroVencimentoBoleto | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Dia Vencimento Boleto</span></dt>
+        <dd>
+          <span>{{ licenca.diaVencimentoBoleto }}</span>
+        </dd>
+        <dt><span>Produtos Contratados</span></dt>
+        <dd>
+          <span>{{ licenca.produtosContratados }}</span>
+        </dd>
+        <dt><span>Valores Negociados</span></dt>
+        <dd>
+          <span>{{ licenca.valoresNegociados }}</span>
+        </dd>
+        <dt><span>Contratacao Bloqueio Ips</span></dt>
+        <dd>
+          <span>{{ licenca.contratacaoBloqueioIps }}</span>
+        </dd>
+        <dt><span>Contratacao Email Proposta</span></dt>
+        <dd>
+          <span>{{ licenca.contratacaoEmailProposta }}</span>
+        </dd>
+        <dt><span>Criar Pedido</span></dt>
+        <dd>
+          <span>{{ licenca.criarPedido }}</span>
+        </dd>
+        <dt><span>Criar Negociacoes</span></dt>
+        <dd>
+          <span>{{ licenca.criarNegociacoes }}</span>
+        </dd>
+        <dt><span>Sincronizar Dados Cadastro Cliente</span></dt>
+        <dd>
+          <span>{{ licenca.sincronizarDadosCadastroCliente }}</span>
+        </dd>
+        <dt><span>Sincronizar Dados Carteira Cliente</span></dt>
+        <dd>
+          <span>{{ licenca.sincronizarDadosCarteiraCliente }}</span>
+        </dd>
+        <dt><span>Bloqueio Acesso</span></dt>
+        <dd>
+          <span>{{ licenca.bloqueioAcesso }}</span>
+        </dd>
+        <dt><span>Data Bloqueio Acesso</span></dt>
+        <dd>
+          <span>{{ licenca.dataBloqueioAcesso | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Motivo Bloqueio Acesso</span></dt>
+        <dd>
+          <span>{{ licenca.motivoBloqueioAcesso }}</span>
+        </dd>
+        <dt><span>Mensagem Bloqueio Acesso</span></dt>
+        <dd>
+          <span>{{ licenca.mensagemBloqueioAcesso }}</span>
+        </dd>
+        <dt><span>Pessoa</span></dt>
+        <dd>
+          <div *ngIf="licenca.pessoa">
+            <a [routerLink]="['/pessoa', licenca.pessoa.id, 'view']">{{ licenca.pessoa.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Pessoa Responsavel</span></dt>
+        <dd>
+          <div *ngIf="licenca.pessoaResponsavel">
+            <a [routerLink]="['/pessoa-fisica', licenca.pessoaResponsavel.id, 'view']">{{ licenca.pessoaResponsavel.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Pessoa Financeiro</span></dt>
+        <dd>
+          <div *ngIf="licenca.pessoaFinanceiro">
+            <a [routerLink]="['/pessoa-fisica', licenca.pessoaFinanceiro.id, 'view']">{{ licenca.pessoaFinanceiro.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Suporte</span></dt>
+        <dd>
+          <div *ngIf="licenca.usuarioSuporte">
+            <a [routerLink]="['/usuario', licenca.usuarioSuporte.id, 'view']">{{ licenca.usuarioSuporte.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Robo</span></dt>
+        <dd>
+          <div *ngIf="licenca.usuarioRobo">
+            <a [routerLink]="['/usuario', licenca.usuarioRobo.id, 'view']">{{ licenca.usuarioRobo.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Filial Padrao</span></dt>
+        <dd>
+          <div *ngIf="licenca.filialPadrao">
+            <a [routerLink]="['/filial', licenca.filialPadrao.id, 'view']">{{ licenca.filialPadrao.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/licenca', licenca.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

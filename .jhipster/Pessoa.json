@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220914141910",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pessoa",
+  "fields": [
+    {
+      "fieldName": "email1",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "telefone1",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pessoa",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "endereco",
+      "ownerSide": true,
+      "relationshipName": "endereco",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

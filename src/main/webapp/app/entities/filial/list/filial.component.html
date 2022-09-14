@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="FilialHeading">
+    <span>Filials</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-filial"
+        [routerLink]="['/filial/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Filial </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="filials?.length === 0">
+    <span>No Filials found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="filials && filials.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoa.id">
+            <div class="d-flex">
+              <span>Pessoa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioCriador.id">
+            <div class="d-flex">
+              <span>Usuario Criador</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let filial of filials; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/filial', filial.id, 'view']">{{ filial.id }}</a>
+          </td>
+          <td>{{ filial.dataCriacao | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="filial.licenca">
+              <a [routerLink]="['/licenca', filial.licenca.id, 'view']">{{ filial.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="filial.pessoa">
+              <a [routerLink]="['/pessoa-juridica', filial.pessoa.id, 'view']">{{ filial.pessoa.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="filial.usuarioCriador">
+              <a [routerLink]="['/usuario', filial.usuarioCriador.id, 'view']">{{ filial.usuarioCriador.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/filial', filial.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/filial', filial.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(filial)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

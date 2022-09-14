@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="PessoaJuridicaHeading">
+    <span>Pessoa Juridicas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pessoa-juridica"
+        [routerLink]="['/pessoa-juridica/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Pessoa Juridica </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pessoaJuridicas?.length === 0">
+    <span>No Pessoa Juridicas found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="pessoaJuridicas && pessoaJuridicas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cnpj">
+            <div class="d-flex">
+              <span>Cnpj</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="razaoSocial">
+            <div class="d-flex">
+              <span>Razao Social</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomeFantasia">
+            <div class="d-flex">
+              <span>Nome Fantasia</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigoCnae">
+            <div class="d-flex">
+              <span>Codigo Cnae</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataAbertura">
+            <div class="d-flex">
+              <span>Data Abertura</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigoCnaePrincipal">
+            <div class="d-flex">
+              <span>Codigo Cnae Principal</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigoNaturezaJuridica">
+            <div class="d-flex">
+              <span>Codigo Natureza Juridica</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="quantidadeFuncionarios">
+            <div class="d-flex">
+              <span>Quantidade Funcionarios</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoaJuridicaLicenca.id">
+            <div class="d-flex">
+              <span>Pessoa Juridica Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pessoaJuridica of pessoaJuridicas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pessoa-juridica', pessoaJuridica.id, 'view']">{{ pessoaJuridica.id }}</a>
+          </td>
+          <td>{{ pessoaJuridica.cnpj }}</td>
+          <td>{{ pessoaJuridica.razaoSocial }}</td>
+          <td>{{ pessoaJuridica.nomeFantasia }}</td>
+          <td>{{ pessoaJuridica.codigoCnae }}</td>
+          <td>{{ pessoaJuridica.dataAbertura | formatMediumDatetime }}</td>
+          <td>{{ pessoaJuridica.codigoCnaePrincipal }}</td>
+          <td>{{ pessoaJuridica.codigoNaturezaJuridica }}</td>
+          <td>{{ pessoaJuridica.quantidadeFuncionarios }}</td>
+          <td>
+            <div *ngIf="pessoaJuridica.pessoaJuridicaLicenca">
+              <a [routerLink]="['/licenca', pessoaJuridica.pessoaJuridicaLicenca.id, 'view']">{{
+                pessoaJuridica.pessoaJuridicaLicenca.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pessoa-juridica', pessoaJuridica.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pessoa-juridica', pessoaJuridica.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pessoaJuridica)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
