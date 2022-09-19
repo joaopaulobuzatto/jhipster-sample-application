@@ -1,0 +1,132 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100414",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "licenca",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataInicioUtilizacao",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dataInicioFaturamento",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dataPrimeiroVencimentoBoleto",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "diaVencimentoBoleto",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "produtosContratados",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "fieldName": "valoresNegociados",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "fieldName": "contratacaoBloqueioIps",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contratacaoEmailProposta",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "criarPedido",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "criarNegociacoes",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sincronizarDadosCadastroCliente",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sincronizarDadosCarteiraCliente",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "bloqueioAcesso",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataBloqueioAcesso",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "motivoBloqueioAcesso",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2500"
+    },
+    {
+      "fieldName": "mensagemBloqueioAcesso",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Licenca",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pessoa",
+      "relationshipName": "pessoa",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pessoaFisica",
+      "relationshipName": "pessoaResponsavel",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pessoaFisica",
+      "relationshipName": "pessoaFinanceiro",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioSuporte",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioRobo",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "filial",
+      "relationshipName": "filialPadrao",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

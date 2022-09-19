@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100408",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario_ip_liberado",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UsuarioIpLiberado",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "ipLiberado",
+      "relationshipName": "ipLiberado",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

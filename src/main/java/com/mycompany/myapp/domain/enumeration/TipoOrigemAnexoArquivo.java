@@ -1,0 +1,19 @@
+package com.mycompany.myapp.domain.enumeration;
+
+/**
+ * The TipoOrigemAnexoArquivo enumeration.
+ */
+public enum TipoOrigemAnexoArquivo {
+    CONFIGURACAO_SISTEMA,
+    PROCESSO_IMPORTACAO_CLIENTES,
+    PROCESSO_ATUALIZACAO_TELEFONES_CLIENTES,
+    CLIENTES,
+    SAC,
+    PROCESSO_IMPORTACAO_LEAD,
+    CONTESTACAO_LEAD,
+    PEDIDOS,
+    TRANSFERENCIA_CARTEIRA_CONSULTOR,
+    ITEM_CORRECAO,
+    NOTIFICACAO_GERAL,
+    USUARIO_LOG_OPERACAO,
+}

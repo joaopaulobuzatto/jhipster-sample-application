@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity TipoDeDocumentoAnexavel.
+    -->
+    <changeSet id="20220919100413-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="licenca_id"
+                                 baseTableName="tipo_de_documento_anexavel"
+                                 constraintName="fk_tipo_de_documento_anexavel__licenca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licenca"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_criador_id"
+                                 baseTableName="tipo_de_documento_anexavel"
+                                 constraintName="fk_tipo_de_documento_anexavel__usuario_criador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+    </changeSet>
+</databaseChangeLog>

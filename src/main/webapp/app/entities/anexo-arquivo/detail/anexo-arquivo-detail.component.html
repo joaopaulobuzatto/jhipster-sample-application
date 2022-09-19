@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="anexoArquivo">
+      <h2 data-cy="anexoArquivoDetailsHeading"><span>Anexo Arquivo</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.descricao }}</span>
+        </dd>
+        <dt><span>Nome Nuvem</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.nomeNuvem }}</span>
+        </dd>
+        <dt><span>Nome Original</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.nomeOriginal }}</span>
+        </dd>
+        <dt><span>Tipo Origem Anexo Arquivo</span></dt>
+        <dd>
+          <span>{{ anexoArquivo.tipoOrigemAnexoArquivo }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="anexoArquivo.licenca">
+            <a [routerLink]="['/licenca', anexoArquivo.licenca.id, 'view']">{{ anexoArquivo.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="anexoArquivo.usuarioCriador">
+            <a [routerLink]="['/usuario', anexoArquivo.usuarioCriador.id, 'view']">{{ anexoArquivo.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Detentor Anexo Arquivo</span></dt>
+        <dd>
+          <div *ngIf="anexoArquivo.detentorAnexoArquivo">
+            <a [routerLink]="['/detentor-anexo-arquivo', anexoArquivo.detentorAnexoArquivo.id, 'view']">{{
+              anexoArquivo.detentorAnexoArquivo.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span>Tipo De Documento Anexavel</span></dt>
+        <dd>
+          <div *ngIf="anexoArquivo.tipoDeDocumentoAnexavel">
+            <a [routerLink]="['/tipo-de-documento-anexavel', anexoArquivo.tipoDeDocumentoAnexavel.id, 'view']">{{
+              anexoArquivo.tipoDeDocumentoAnexavel.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/anexo-arquivo', anexoArquivo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

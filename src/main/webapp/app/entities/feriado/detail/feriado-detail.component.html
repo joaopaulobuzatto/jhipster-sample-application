@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="feriado">
+      <h2 data-cy="feriadoDetailsHeading"><span>Feriado</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ feriado.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ feriado.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ feriado.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data</span></dt>
+        <dd>
+          <span>{{ feriado.data | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Nome</span></dt>
+        <dd>
+          <span>{{ feriado.nome }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="feriado.licenca">
+            <a [routerLink]="['/licenca', feriado.licenca.id, 'view']">{{ feriado.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="feriado.usuarioCriador">
+            <a [routerLink]="['/usuario', feriado.usuarioCriador.id, 'view']">{{ feriado.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/feriado', feriado.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

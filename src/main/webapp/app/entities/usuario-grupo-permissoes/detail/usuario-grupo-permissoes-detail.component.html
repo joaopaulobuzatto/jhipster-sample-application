@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuarioGrupoPermissoes">
+      <h2 data-cy="usuarioGrupoPermissoesDetailsHeading"><span>Usuario Grupo Permissoes</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ usuarioGrupoPermissoes.id }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="usuarioGrupoPermissoes.licenca">
+            <a [routerLink]="['/licenca', usuarioGrupoPermissoes.licenca.id, 'view']">{{ usuarioGrupoPermissoes.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <div *ngIf="usuarioGrupoPermissoes.usuario">
+            <a [routerLink]="['/usuario', usuarioGrupoPermissoes.usuario.id, 'view']">{{ usuarioGrupoPermissoes.usuario.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Grupo Permissoes</span></dt>
+        <dd>
+          <div *ngIf="usuarioGrupoPermissoes.grupoPermissoes">
+            <a [routerLink]="['/grupo-permissoes', usuarioGrupoPermissoes.grupoPermissoes.id, 'view']">{{
+              usuarioGrupoPermissoes.grupoPermissoes.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario-grupo-permissoes', usuarioGrupoPermissoes.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

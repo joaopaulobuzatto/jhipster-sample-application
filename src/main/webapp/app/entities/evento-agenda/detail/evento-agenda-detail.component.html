@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventoAgenda">
+      <h2 data-cy="eventoAgendaDetailsHeading"><span>Evento Agenda</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ eventoAgenda.id }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ eventoAgenda.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Data</span></dt>
+        <dd>
+          <span>{{ eventoAgenda.data | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ eventoAgenda.descricao }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="eventoAgenda.licenca">
+            <a [routerLink]="['/licenca', eventoAgenda.licenca.id, 'view']">{{ eventoAgenda.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="eventoAgenda.usuarioCriador">
+            <a [routerLink]="['/usuario', eventoAgenda.usuarioCriador.id, 'view']">{{ eventoAgenda.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Responsavel</span></dt>
+        <dd>
+          <div *ngIf="eventoAgenda.usuarioResponsavel">
+            <a [routerLink]="['/usuario', eventoAgenda.usuarioResponsavel.id, 'view']">{{ eventoAgenda.usuarioResponsavel.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/evento-agenda', eventoAgenda.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

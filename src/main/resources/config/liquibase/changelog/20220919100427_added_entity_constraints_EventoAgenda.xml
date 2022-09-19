@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity EventoAgenda.
+    -->
+    <changeSet id="20220919100427-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="licenca_id"
+                                 baseTableName="evento_agenda"
+                                 constraintName="fk_evento_agenda__licenca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licenca"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_criador_id"
+                                 baseTableName="evento_agenda"
+                                 constraintName="fk_evento_agenda__usuario_criador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_responsavel_id"
+                                 baseTableName="evento_agenda"
+                                 constraintName="fk_evento_agenda__usuario_responsavel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+    </changeSet>
+</databaseChangeLog>

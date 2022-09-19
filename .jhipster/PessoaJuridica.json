@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100419",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pessoa_juridica",
+  "fields": [
+    {
+      "fieldName": "cnpj",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "14"
+    },
+    {
+      "fieldName": "razaoSocial",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "nomeFantasia",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "codigoCnae",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "dataAbertura",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "codigoCnaePrincipal",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "codigoNaturezaJuridica",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "quantidadeFuncionarios",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PessoaJuridica",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "pessoaJuridicaLicenca",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

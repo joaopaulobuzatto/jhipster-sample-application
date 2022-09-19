@@ -1,0 +1,248 @@
+<div>
+  <h2 id="page-heading" data-cy="UsuarioHeading">
+    <span>Usuarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-usuario"
+        [routerLink]="['/usuario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Usuario </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="usuarios?.length === 0">
+    <span>No Usuarios found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="usuarios && usuarios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigo">
+            <div class="d-flex">
+              <span>Codigo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="senha">
+            <div class="d-flex">
+              <span>Senha</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isAdmin">
+            <div class="d-flex">
+              <span>Is Admin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isSuporte">
+            <div class="d-flex">
+              <span>Is Suporte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomeExibicao">
+            <div class="d-flex">
+              <span>Nome Exibicao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isConsultor">
+            <div class="d-flex">
+              <span>Is Consultor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isSupervisor">
+            <div class="d-flex">
+              <span>Is Supervisor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isAtivo">
+            <div class="d-flex">
+              <span>Is Ativo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isAdministrativo">
+            <div class="d-flex">
+              <span>Is Administrativo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="receberEmails">
+            <div class="d-flex">
+              <span>Receber Emails</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isEmailValido">
+            <div class="d-flex">
+              <span>Is Email Valido</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="uuidEmail">
+            <div class="d-flex">
+              <span>Uuid Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span>Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isExecutorSac">
+            <div class="d-flex">
+              <span>Is Executor Sac</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="liberarHorarioFeriado">
+            <div class="d-flex">
+              <span>Liberar Horario Feriado</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="supervisor.id">
+            <div class="d-flex">
+              <span>Supervisor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioCriador.id">
+            <div class="d-flex">
+              <span>Usuario Criador</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pessoaFisica.id">
+            <div class="d-flex">
+              <span>Pessoa Fisica</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="horarioTrabalho.id">
+            <div class="d-flex">
+              <span>Horario Trabalho</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/usuario', usuario.id, 'view']">{{ usuario.id }}</a>
+          </td>
+          <td>{{ usuario.codigo }}</td>
+          <td>{{ usuario.dataCriacao | formatMediumDatetime }}</td>
+          <td>{{ usuario.senha }}</td>
+          <td>{{ usuario.isAdmin }}</td>
+          <td>{{ usuario.isSuporte }}</td>
+          <td>{{ usuario.nomeExibicao }}</td>
+          <td>{{ usuario.isConsultor }}</td>
+          <td>{{ usuario.isSupervisor }}</td>
+          <td>{{ usuario.isAtivo }}</td>
+          <td>{{ usuario.isAdministrativo }}</td>
+          <td>{{ usuario.receberEmails }}</td>
+          <td>{{ usuario.isEmailValido }}</td>
+          <td>{{ usuario.uuidEmail }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.isExecutorSac }}</td>
+          <td>{{ usuario.liberarHorarioFeriado }}</td>
+          <td>
+            <div *ngIf="usuario.licenca">
+              <a [routerLink]="['/licenca', usuario.licenca.id, 'view']">{{ usuario.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuario.supervisor">
+              <a [routerLink]="['/usuario', usuario.supervisor.id, 'view']">{{ usuario.supervisor.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuario.usuarioCriador">
+              <a [routerLink]="['/usuario', usuario.usuarioCriador.id, 'view']">{{ usuario.usuarioCriador.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuario.pessoaFisica">
+              <a [routerLink]="['/pessoa-fisica', usuario.pessoaFisica.id, 'view']">{{ usuario.pessoaFisica.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuario.horarioTrabalho">
+              <a [routerLink]="['/horario-trabalho', usuario.horarioTrabalho.id, 'view']">{{ usuario.horarioTrabalho.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/usuario', usuario.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(usuario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

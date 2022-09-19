@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ofertaServico">
+      <h2 data-cy="ofertaServicoDetailsHeading"><span>Oferta Servico</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ ofertaServico.id }}</span>
+        </dd>
+        <dt><span>Oferta</span></dt>
+        <dd>
+          <div *ngIf="ofertaServico.oferta">
+            <a [routerLink]="['/oferta', ofertaServico.oferta.id, 'view']">{{ ofertaServico.oferta.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Servico</span></dt>
+        <dd>
+          <div *ngIf="ofertaServico.servico">
+            <a [routerLink]="['/servico', ofertaServico.servico.id, 'view']">{{ ofertaServico.servico.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/oferta-servico', ofertaServico.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

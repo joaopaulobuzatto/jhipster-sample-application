@@ -1,0 +1,103 @@
+<div>
+  <h2 id="page-heading" data-cy="OfertaServicoHeading">
+    <span>Oferta Servicos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-oferta-servico"
+        [routerLink]="['/oferta-servico/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Oferta Servico </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ofertaServicos?.length === 0">
+    <span>No Oferta Servicos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="ofertaServicos && ofertaServicos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="oferta.id">
+            <div class="d-flex">
+              <span>Oferta</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="servico.id">
+            <div class="d-flex">
+              <span>Servico</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ofertaServico of ofertaServicos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/oferta-servico', ofertaServico.id, 'view']">{{ ofertaServico.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="ofertaServico.oferta">
+              <a [routerLink]="['/oferta', ofertaServico.oferta.id, 'view']">{{ ofertaServico.oferta.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="ofertaServico.servico">
+              <a [routerLink]="['/servico', ofertaServico.servico.id, 'view']">{{ ofertaServico.servico.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/oferta-servico', ofertaServico.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/oferta-servico', ofertaServico.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ofertaServico)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

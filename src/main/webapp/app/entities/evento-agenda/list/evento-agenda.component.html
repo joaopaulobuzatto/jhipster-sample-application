@@ -1,0 +1,135 @@
+<div>
+  <h2 id="page-heading" data-cy="EventoAgendaHeading">
+    <span>Evento Agenda</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-evento-agenda"
+        [routerLink]="['/evento-agenda/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Evento Agenda </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="eventoAgenda?.length === 0">
+    <span>No Evento Agenda found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="eventoAgenda && eventoAgenda.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="data">
+            <div class="d-flex">
+              <span>Data</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descricao">
+            <div class="d-flex">
+              <span>Descricao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioCriador.id">
+            <div class="d-flex">
+              <span>Usuario Criador</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioResponsavel.id">
+            <div class="d-flex">
+              <span>Usuario Responsavel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eventoAgenda of eventoAgenda; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/evento-agenda', eventoAgenda.id, 'view']">{{ eventoAgenda.id }}</a>
+          </td>
+          <td>{{ eventoAgenda.dataCriacao | formatMediumDatetime }}</td>
+          <td>{{ eventoAgenda.data | formatMediumDatetime }}</td>
+          <td>{{ eventoAgenda.descricao }}</td>
+          <td>
+            <div *ngIf="eventoAgenda.licenca">
+              <a [routerLink]="['/licenca', eventoAgenda.licenca.id, 'view']">{{ eventoAgenda.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="eventoAgenda.usuarioCriador">
+              <a [routerLink]="['/usuario', eventoAgenda.usuarioCriador.id, 'view']">{{ eventoAgenda.usuarioCriador.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="eventoAgenda.usuarioResponsavel">
+              <a [routerLink]="['/usuario', eventoAgenda.usuarioResponsavel.id, 'view']">{{ eventoAgenda.usuarioResponsavel.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/evento-agenda', eventoAgenda.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/evento-agenda', eventoAgenda.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(eventoAgenda)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

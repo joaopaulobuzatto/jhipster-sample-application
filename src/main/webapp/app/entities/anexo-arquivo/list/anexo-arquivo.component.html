@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="AnexoArquivoHeading">
+    <span>Anexo Arquivos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-anexo-arquivo"
+        [routerLink]="['/anexo-arquivo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Anexo Arquivo </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="anexoArquivos?.length === 0">
+    <span>No Anexo Arquivos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="anexoArquivos && anexoArquivos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codigo">
+            <div class="d-flex">
+              <span>Codigo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="descricao">
+            <div class="d-flex">
+              <span>Descricao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomeNuvem">
+            <div class="d-flex">
+              <span>Nome Nuvem</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomeOriginal">
+            <div class="d-flex">
+              <span>Nome Original</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tipoOrigemAnexoArquivo">
+            <div class="d-flex">
+              <span>Tipo Origem Anexo Arquivo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioCriador.id">
+            <div class="d-flex">
+              <span>Usuario Criador</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="detentorAnexoArquivo.id">
+            <div class="d-flex">
+              <span>Detentor Anexo Arquivo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tipoDeDocumentoAnexavel.id">
+            <div class="d-flex">
+              <span>Tipo De Documento Anexavel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let anexoArquivo of anexoArquivos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/anexo-arquivo', anexoArquivo.id, 'view']">{{ anexoArquivo.id }}</a>
+          </td>
+          <td>{{ anexoArquivo.codigo }}</td>
+          <td>{{ anexoArquivo.dataCriacao | formatMediumDatetime }}</td>
+          <td>{{ anexoArquivo.descricao }}</td>
+          <td>{{ anexoArquivo.nomeNuvem }}</td>
+          <td>{{ anexoArquivo.nomeOriginal }}</td>
+          <td>{{ anexoArquivo.tipoOrigemAnexoArquivo }}</td>
+          <td>
+            <div *ngIf="anexoArquivo.licenca">
+              <a [routerLink]="['/licenca', anexoArquivo.licenca.id, 'view']">{{ anexoArquivo.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="anexoArquivo.usuarioCriador">
+              <a [routerLink]="['/usuario', anexoArquivo.usuarioCriador.id, 'view']">{{ anexoArquivo.usuarioCriador.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="anexoArquivo.detentorAnexoArquivo">
+              <a [routerLink]="['/detentor-anexo-arquivo', anexoArquivo.detentorAnexoArquivo.id, 'view']">{{
+                anexoArquivo.detentorAnexoArquivo.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="anexoArquivo.tipoDeDocumentoAnexavel">
+              <a [routerLink]="['/tipo-de-documento-anexavel', anexoArquivo.tipoDeDocumentoAnexavel.id, 'view']">{{
+                anexoArquivo.tipoDeDocumentoAnexavel.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/anexo-arquivo', anexoArquivo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/anexo-arquivo', anexoArquivo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(anexoArquivo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

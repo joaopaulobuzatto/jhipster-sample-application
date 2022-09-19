@@ -48,6 +48,34 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.Usuario.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UsuarioGrupoPermissoes.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UsuarioFilial.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UsuarioIpLiberado.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.GrupoPermissoes.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.IpLiberado.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.DetentorAnexoArquivo.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.AnexoArquivo.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.TipoDeDocumentoAnexavel.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Licenca.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Endereco.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Operadora.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Pessoa.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.PessoaFisica.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.PessoaJuridica.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.HorarioTrabalho.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.HorarioTrabalhoPeriodo.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Origem.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Filial.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Aparelho.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.ArrCep.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Cor.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.EventoAgenda.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Feriado.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Plano.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Oferta.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.OfertaServico.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Servico.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

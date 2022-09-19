@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100418",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pessoa_fisica",
+  "fields": [
+    {
+      "fieldName": "nomeCompleto",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "cpf",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "14"
+    },
+    {
+      "fieldName": "rg",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "15"
+    },
+    {
+      "fieldName": "dataNascimento",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PessoaFisica",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "pessoaFisicaLicenca",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

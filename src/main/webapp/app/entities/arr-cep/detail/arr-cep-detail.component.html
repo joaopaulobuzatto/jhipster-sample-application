@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="arrCep">
+      <h2 data-cy="arrCepDetailsHeading"><span>Arr Cep</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ arrCep.id }}</span>
+        </dd>
+        <dt><span>Cepnum</span></dt>
+        <dd>
+          <span>{{ arrCep.cepnum }}</span>
+        </dd>
+        <dt><span>Cependtip</span></dt>
+        <dd>
+          <span>{{ arrCep.cependtip }}</span>
+        </dd>
+        <dt><span>Cepend</span></dt>
+        <dd>
+          <span>{{ arrCep.cepend }}</span>
+        </dd>
+        <dt><span>Cependcompl</span></dt>
+        <dd>
+          <span>{{ arrCep.cependcompl }}</span>
+        </dd>
+        <dt><span>Cepbai</span></dt>
+        <dd>
+          <span>{{ arrCep.cepbai }}</span>
+        </dd>
+        <dt><span>Cepcid</span></dt>
+        <dd>
+          <span>{{ arrCep.cepcid }}</span>
+        </dd>
+        <dt><span>Cepmuncod</span></dt>
+        <dd>
+          <span>{{ arrCep.cepmuncod }}</span>
+        </dd>
+        <dt><span>Cepmunnom</span></dt>
+        <dd>
+          <span>{{ arrCep.cepmunnom }}</span>
+        </dd>
+        <dt><span>Cepmunuf</span></dt>
+        <dd>
+          <span>{{ arrCep.cepmunuf }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/arr-cep', arrCep.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

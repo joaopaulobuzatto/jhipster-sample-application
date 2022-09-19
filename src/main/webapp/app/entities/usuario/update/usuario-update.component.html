@@ -1,0 +1,326 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-usuario-heading" data-cy="UsuarioCreateUpdateHeading">Create or edit a Usuario</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigo">Codigo</label>
+          <input type="number" class="form-control" name="codigo" id="field_codigo" data-cy="codigo" formControlName="codigo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataCriacao">Data Criacao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataCriacao"
+              data-cy="dataCriacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataCriacao"
+              formControlName="dataCriacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dataCriacao')!.invalid && (editForm.get('dataCriacao')!.dirty || editForm.get('dataCriacao')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('dataCriacao')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataCriacao')?.errors?.datetimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_senha">Senha</label>
+          <input type="text" class="form-control" name="senha" id="field_senha" data-cy="senha" formControlName="senha" />
+          <div *ngIf="editForm.get('senha')!.invalid && (editForm.get('senha')!.dirty || editForm.get('senha')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('senha')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('senha')?.errors?.maxlength">
+              This field cannot be longer than 70 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isAdmin">Is Admin</label>
+          <input type="checkbox" class="form-check" name="isAdmin" id="field_isAdmin" data-cy="isAdmin" formControlName="isAdmin" />
+          <div *ngIf="editForm.get('isAdmin')!.invalid && (editForm.get('isAdmin')!.dirty || editForm.get('isAdmin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('isAdmin')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isSuporte">Is Suporte</label>
+          <input type="checkbox" class="form-check" name="isSuporte" id="field_isSuporte" data-cy="isSuporte" formControlName="isSuporte" />
+          <div *ngIf="editForm.get('isSuporte')!.invalid && (editForm.get('isSuporte')!.dirty || editForm.get('isSuporte')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('isSuporte')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nomeExibicao">Nome Exibicao</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeExibicao"
+            id="field_nomeExibicao"
+            data-cy="nomeExibicao"
+            formControlName="nomeExibicao"
+          />
+          <div
+            *ngIf="editForm.get('nomeExibicao')!.invalid && (editForm.get('nomeExibicao')!.dirty || editForm.get('nomeExibicao')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('nomeExibicao')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('nomeExibicao')?.errors?.maxlength">
+              This field cannot be longer than 70 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isConsultor">Is Consultor</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isConsultor"
+            id="field_isConsultor"
+            data-cy="isConsultor"
+            formControlName="isConsultor"
+          />
+          <div *ngIf="editForm.get('isConsultor')!.invalid && (editForm.get('isConsultor')!.dirty || editForm.get('isConsultor')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('isConsultor')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isSupervisor">Is Supervisor</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isSupervisor"
+            id="field_isSupervisor"
+            data-cy="isSupervisor"
+            formControlName="isSupervisor"
+          />
+          <div
+            *ngIf="editForm.get('isSupervisor')!.invalid && (editForm.get('isSupervisor')!.dirty || editForm.get('isSupervisor')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('isSupervisor')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isAtivo">Is Ativo</label>
+          <input type="checkbox" class="form-check" name="isAtivo" id="field_isAtivo" data-cy="isAtivo" formControlName="isAtivo" />
+          <div *ngIf="editForm.get('isAtivo')!.invalid && (editForm.get('isAtivo')!.dirty || editForm.get('isAtivo')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('isAtivo')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isAdministrativo">Is Administrativo</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isAdministrativo"
+            id="field_isAdministrativo"
+            data-cy="isAdministrativo"
+            formControlName="isAdministrativo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_receberEmails">Receber Emails</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="receberEmails"
+            id="field_receberEmails"
+            data-cy="receberEmails"
+            formControlName="receberEmails"
+          />
+          <div
+            *ngIf="
+              editForm.get('receberEmails')!.invalid && (editForm.get('receberEmails')!.dirty || editForm.get('receberEmails')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('receberEmails')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isEmailValido">Is Email Valido</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isEmailValido"
+            id="field_isEmailValido"
+            data-cy="isEmailValido"
+            formControlName="isEmailValido"
+          />
+          <div
+            *ngIf="
+              editForm.get('isEmailValido')!.invalid && (editForm.get('isEmailValido')!.dirty || editForm.get('isEmailValido')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('isEmailValido')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_uuidEmail">Uuid Email</label>
+          <input type="text" class="form-control" name="uuidEmail" id="field_uuidEmail" data-cy="uuidEmail" formControlName="uuidEmail" />
+          <div *ngIf="editForm.get('uuidEmail')!.invalid && (editForm.get('uuidEmail')!.dirty || editForm.get('uuidEmail')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uuidEmail')?.errors?.maxlength">
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isExecutorSac">Is Executor Sac</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isExecutorSac"
+            id="field_isExecutorSac"
+            data-cy="isExecutorSac"
+            formControlName="isExecutorSac"
+          />
+          <div
+            *ngIf="
+              editForm.get('isExecutorSac')!.invalid && (editForm.get('isExecutorSac')!.dirty || editForm.get('isExecutorSac')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('isExecutorSac')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_liberarHorarioFeriado">Liberar Horario Feriado</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="liberarHorarioFeriado"
+            id="field_liberarHorarioFeriado"
+            data-cy="liberarHorarioFeriado"
+            formControlName="liberarHorarioFeriado"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_licenca">Licenca</label>
+          <select
+            class="form-control"
+            id="field_licenca"
+            data-cy="licenca"
+            name="licenca"
+            formControlName="licenca"
+            [compareWith]="compareLicenca"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="licencaOption" *ngFor="let licencaOption of licencasSharedCollection">{{ licencaOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_supervisor">Supervisor</label>
+          <select
+            class="form-control"
+            id="field_supervisor"
+            data-cy="supervisor"
+            name="supervisor"
+            formControlName="supervisor"
+            [compareWith]="compareUsuario"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="usuarioOption" *ngFor="let usuarioOption of usuariosSharedCollection">{{ usuarioOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_usuarioCriador">Usuario Criador</label>
+          <select
+            class="form-control"
+            id="field_usuarioCriador"
+            data-cy="usuarioCriador"
+            name="usuarioCriador"
+            formControlName="usuarioCriador"
+            [compareWith]="compareUsuario"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="usuarioOption" *ngFor="let usuarioOption of usuariosSharedCollection">{{ usuarioOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pessoaFisica">Pessoa Fisica</label>
+          <select
+            class="form-control"
+            id="field_pessoaFisica"
+            data-cy="pessoaFisica"
+            name="pessoaFisica"
+            formControlName="pessoaFisica"
+            [compareWith]="comparePessoaFisica"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pessoaFisicaOption" *ngFor="let pessoaFisicaOption of pessoaFisicasSharedCollection">
+              {{ pessoaFisicaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_horarioTrabalho">Horario Trabalho</label>
+          <select
+            class="form-control"
+            id="field_horarioTrabalho"
+            data-cy="horarioTrabalho"
+            name="horarioTrabalho"
+            formControlName="horarioTrabalho"
+            [compareWith]="compareHorarioTrabalho"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="horarioTrabalhoOption" *ngFor="let horarioTrabalhoOption of horarioTrabalhosSharedCollection">
+              {{ horarioTrabalhoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

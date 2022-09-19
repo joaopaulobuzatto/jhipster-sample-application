@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="origem">
+      <h2 data-cy="origemDetailsHeading"><span>Origem</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ origem.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ origem.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ origem.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ origem.descricao }}</span>
+        </dd>
+        <dt><span>Tipo</span></dt>
+        <dd>
+          <span>{{ origem.tipo }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="origem.licenca">
+            <a [routerLink]="['/licenca', origem.licenca.id, 'view']">{{ origem.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="origem.usuarioCriador">
+            <a [routerLink]="['/usuario', origem.usuarioCriador.id, 'view']">{{ origem.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/origem', origem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

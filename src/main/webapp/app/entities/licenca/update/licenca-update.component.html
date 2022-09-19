@@ -1,0 +1,436 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-licenca-heading" data-cy="LicencaCreateUpdateHeading">Create or edit a Licenca</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigo">Codigo</label>
+          <input type="number" class="form-control" name="codigo" id="field_codigo" data-cy="codigo" formControlName="codigo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataCriacao">Data Criacao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataCriacao"
+              data-cy="dataCriacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataCriacao"
+              formControlName="dataCriacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dataCriacao')!.invalid && (editForm.get('dataCriacao')!.dirty || editForm.get('dataCriacao')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('dataCriacao')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataCriacao')?.errors?.datetimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataInicioUtilizacao">Data Inicio Utilizacao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataInicioUtilizacao"
+              data-cy="dataInicioUtilizacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataInicioUtilizacao"
+              formControlName="dataInicioUtilizacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataInicioFaturamento">Data Inicio Faturamento</label>
+          <div class="d-flex">
+            <input
+              id="field_dataInicioFaturamento"
+              data-cy="dataInicioFaturamento"
+              type="datetime-local"
+              class="form-control"
+              name="dataInicioFaturamento"
+              formControlName="dataInicioFaturamento"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataPrimeiroVencimentoBoleto">Data Primeiro Vencimento Boleto</label>
+          <div class="d-flex">
+            <input
+              id="field_dataPrimeiroVencimentoBoleto"
+              data-cy="dataPrimeiroVencimentoBoleto"
+              type="datetime-local"
+              class="form-control"
+              name="dataPrimeiroVencimentoBoleto"
+              formControlName="dataPrimeiroVencimentoBoleto"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_diaVencimentoBoleto">Dia Vencimento Boleto</label>
+          <input
+            type="number"
+            class="form-control"
+            name="diaVencimentoBoleto"
+            id="field_diaVencimentoBoleto"
+            data-cy="diaVencimentoBoleto"
+            formControlName="diaVencimentoBoleto"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_produtosContratados">Produtos Contratados</label>
+          <input
+            type="text"
+            class="form-control"
+            name="produtosContratados"
+            id="field_produtosContratados"
+            data-cy="produtosContratados"
+            formControlName="produtosContratados"
+          />
+          <div
+            *ngIf="
+              editForm.get('produtosContratados')!.invalid &&
+              (editForm.get('produtosContratados')!.dirty || editForm.get('produtosContratados')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('produtosContratados')?.errors?.maxlength">
+              This field cannot be longer than 300 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_valoresNegociados">Valores Negociados</label>
+          <input
+            type="text"
+            class="form-control"
+            name="valoresNegociados"
+            id="field_valoresNegociados"
+            data-cy="valoresNegociados"
+            formControlName="valoresNegociados"
+          />
+          <div
+            *ngIf="
+              editForm.get('valoresNegociados')!.invalid &&
+              (editForm.get('valoresNegociados')!.dirty || editForm.get('valoresNegociados')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('valoresNegociados')?.errors?.maxlength">
+              This field cannot be longer than 300 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_contratacaoBloqueioIps">Contratacao Bloqueio Ips</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="contratacaoBloqueioIps"
+            id="field_contratacaoBloqueioIps"
+            data-cy="contratacaoBloqueioIps"
+            formControlName="contratacaoBloqueioIps"
+          />
+          <div
+            *ngIf="
+              editForm.get('contratacaoBloqueioIps')!.invalid &&
+              (editForm.get('contratacaoBloqueioIps')!.dirty || editForm.get('contratacaoBloqueioIps')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('contratacaoBloqueioIps')?.errors?.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_contratacaoEmailProposta">Contratacao Email Proposta</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="contratacaoEmailProposta"
+            id="field_contratacaoEmailProposta"
+            data-cy="contratacaoEmailProposta"
+            formControlName="contratacaoEmailProposta"
+          />
+          <div
+            *ngIf="
+              editForm.get('contratacaoEmailProposta')!.invalid &&
+              (editForm.get('contratacaoEmailProposta')!.dirty || editForm.get('contratacaoEmailProposta')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('contratacaoEmailProposta')?.errors?.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_criarPedido">Criar Pedido</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="criarPedido"
+            id="field_criarPedido"
+            data-cy="criarPedido"
+            formControlName="criarPedido"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_criarNegociacoes">Criar Negociacoes</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="criarNegociacoes"
+            id="field_criarNegociacoes"
+            data-cy="criarNegociacoes"
+            formControlName="criarNegociacoes"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_sincronizarDadosCadastroCliente">Sincronizar Dados Cadastro Cliente</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="sincronizarDadosCadastroCliente"
+            id="field_sincronizarDadosCadastroCliente"
+            data-cy="sincronizarDadosCadastroCliente"
+            formControlName="sincronizarDadosCadastroCliente"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_sincronizarDadosCarteiraCliente">Sincronizar Dados Carteira Cliente</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="sincronizarDadosCarteiraCliente"
+            id="field_sincronizarDadosCarteiraCliente"
+            data-cy="sincronizarDadosCarteiraCliente"
+            formControlName="sincronizarDadosCarteiraCliente"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_bloqueioAcesso">Bloqueio Acesso</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="bloqueioAcesso"
+            id="field_bloqueioAcesso"
+            data-cy="bloqueioAcesso"
+            formControlName="bloqueioAcesso"
+          />
+          <div
+            *ngIf="
+              editForm.get('bloqueioAcesso')!.invalid && (editForm.get('bloqueioAcesso')!.dirty || editForm.get('bloqueioAcesso')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('bloqueioAcesso')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataBloqueioAcesso">Data Bloqueio Acesso</label>
+          <div class="d-flex">
+            <input
+              id="field_dataBloqueioAcesso"
+              data-cy="dataBloqueioAcesso"
+              type="datetime-local"
+              class="form-control"
+              name="dataBloqueioAcesso"
+              formControlName="dataBloqueioAcesso"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dataBloqueioAcesso')!.invalid &&
+              (editForm.get('dataBloqueioAcesso')!.dirty || editForm.get('dataBloqueioAcesso')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('dataBloqueioAcesso')?.errors?.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('dataBloqueioAcesso')?.errors?.datetimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_motivoBloqueioAcesso">Motivo Bloqueio Acesso</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motivoBloqueioAcesso"
+            id="field_motivoBloqueioAcesso"
+            data-cy="motivoBloqueioAcesso"
+            formControlName="motivoBloqueioAcesso"
+          />
+          <div
+            *ngIf="
+              editForm.get('motivoBloqueioAcesso')!.invalid &&
+              (editForm.get('motivoBloqueioAcesso')!.dirty || editForm.get('motivoBloqueioAcesso')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('motivoBloqueioAcesso')?.errors?.maxlength">
+              This field cannot be longer than 2500 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_mensagemBloqueioAcesso">Mensagem Bloqueio Acesso</label>
+          <input
+            type="text"
+            class="form-control"
+            name="mensagemBloqueioAcesso"
+            id="field_mensagemBloqueioAcesso"
+            data-cy="mensagemBloqueioAcesso"
+            formControlName="mensagemBloqueioAcesso"
+          />
+          <div
+            *ngIf="
+              editForm.get('mensagemBloqueioAcesso')!.invalid &&
+              (editForm.get('mensagemBloqueioAcesso')!.dirty || editForm.get('mensagemBloqueioAcesso')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('mensagemBloqueioAcesso')?.errors?.maxlength">
+              This field cannot be longer than 150 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pessoa">Pessoa</label>
+          <select
+            class="form-control"
+            id="field_pessoa"
+            data-cy="pessoa"
+            name="pessoa"
+            formControlName="pessoa"
+            [compareWith]="comparePessoa"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pessoaOption" *ngFor="let pessoaOption of pessoasSharedCollection">{{ pessoaOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pessoaResponsavel">Pessoa Responsavel</label>
+          <select
+            class="form-control"
+            id="field_pessoaResponsavel"
+            data-cy="pessoaResponsavel"
+            name="pessoaResponsavel"
+            formControlName="pessoaResponsavel"
+            [compareWith]="comparePessoaFisica"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pessoaFisicaOption" *ngFor="let pessoaFisicaOption of pessoaFisicasSharedCollection">
+              {{ pessoaFisicaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pessoaFinanceiro">Pessoa Financeiro</label>
+          <select
+            class="form-control"
+            id="field_pessoaFinanceiro"
+            data-cy="pessoaFinanceiro"
+            name="pessoaFinanceiro"
+            formControlName="pessoaFinanceiro"
+            [compareWith]="comparePessoaFisica"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="pessoaFisicaOption" *ngFor="let pessoaFisicaOption of pessoaFisicasSharedCollection">
+              {{ pessoaFisicaOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_usuarioSuporte">Usuario Suporte</label>
+          <select
+            class="form-control"
+            id="field_usuarioSuporte"
+            data-cy="usuarioSuporte"
+            name="usuarioSuporte"
+            formControlName="usuarioSuporte"
+            [compareWith]="compareUsuario"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="usuarioOption" *ngFor="let usuarioOption of usuariosSharedCollection">{{ usuarioOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_usuarioRobo">Usuario Robo</label>
+          <select
+            class="form-control"
+            id="field_usuarioRobo"
+            data-cy="usuarioRobo"
+            name="usuarioRobo"
+            formControlName="usuarioRobo"
+            [compareWith]="compareUsuario"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="usuarioOption" *ngFor="let usuarioOption of usuariosSharedCollection">{{ usuarioOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_filialPadrao">Filial Padrao</label>
+          <select
+            class="form-control"
+            id="field_filialPadrao"
+            data-cy="filialPadrao"
+            name="filialPadrao"
+            formControlName="filialPadrao"
+            [compareWith]="compareFilial"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="filialOption" *ngFor="let filialOption of filialsSharedCollection">{{ filialOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

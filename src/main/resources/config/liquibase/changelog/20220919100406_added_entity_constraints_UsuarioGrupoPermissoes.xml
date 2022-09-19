@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity UsuarioGrupoPermissoes.
+    -->
+    <changeSet id="20220919100406-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="licenca_id"
+                                 baseTableName="usuario_grupo_permissoes"
+                                 constraintName="fk_usuario_grupo_permissoes__licenca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licenca"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="usuario_grupo_permissoes"
+                                 constraintName="fk_usuario_grupo_permissoes__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="grupo_permissoes_id"
+                                 baseTableName="usuario_grupo_permissoes"
+                                 constraintName="fk_usuario_grupo_permissoes__grupo_permissoes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grupo_permissoes"/>
+    </changeSet>
+</databaseChangeLog>

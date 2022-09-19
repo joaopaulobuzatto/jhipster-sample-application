@@ -1,0 +1,182 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pessoa-juridica-heading" data-cy="PessoaJuridicaCreateUpdateHeading">Create or edit a Pessoa Juridica</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cnpj">Cnpj</label>
+          <input type="text" class="form-control" name="cnpj" id="field_cnpj" data-cy="cnpj" formControlName="cnpj" />
+          <div *ngIf="editForm.get('cnpj')!.invalid && (editForm.get('cnpj')!.dirty || editForm.get('cnpj')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cnpj')?.errors?.maxlength">
+              This field cannot be longer than 14 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_razaoSocial">Razao Social</label>
+          <input
+            type="text"
+            class="form-control"
+            name="razaoSocial"
+            id="field_razaoSocial"
+            data-cy="razaoSocial"
+            formControlName="razaoSocial"
+          />
+          <div *ngIf="editForm.get('razaoSocial')!.invalid && (editForm.get('razaoSocial')!.dirty || editForm.get('razaoSocial')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('razaoSocial')?.errors?.maxlength">
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nomeFantasia">Nome Fantasia</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeFantasia"
+            id="field_nomeFantasia"
+            data-cy="nomeFantasia"
+            formControlName="nomeFantasia"
+          />
+          <div
+            *ngIf="editForm.get('nomeFantasia')!.invalid && (editForm.get('nomeFantasia')!.dirty || editForm.get('nomeFantasia')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('nomeFantasia')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('nomeFantasia')?.errors?.maxlength">
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigoCnae">Codigo Cnae</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoCnae"
+            id="field_codigoCnae"
+            data-cy="codigoCnae"
+            formControlName="codigoCnae"
+          />
+          <div *ngIf="editForm.get('codigoCnae')!.invalid && (editForm.get('codigoCnae')!.dirty || editForm.get('codigoCnae')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('codigoCnae')?.errors?.maxlength">
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dataAbertura">Data Abertura</label>
+          <div class="d-flex">
+            <input
+              id="field_dataAbertura"
+              data-cy="dataAbertura"
+              type="datetime-local"
+              class="form-control"
+              name="dataAbertura"
+              formControlName="dataAbertura"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigoCnaePrincipal">Codigo Cnae Principal</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoCnaePrincipal"
+            id="field_codigoCnaePrincipal"
+            data-cy="codigoCnaePrincipal"
+            formControlName="codigoCnaePrincipal"
+          />
+          <div
+            *ngIf="
+              editForm.get('codigoCnaePrincipal')!.invalid &&
+              (editForm.get('codigoCnaePrincipal')!.dirty || editForm.get('codigoCnaePrincipal')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('codigoCnaePrincipal')?.errors?.maxlength">
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_codigoNaturezaJuridica">Codigo Natureza Juridica</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoNaturezaJuridica"
+            id="field_codigoNaturezaJuridica"
+            data-cy="codigoNaturezaJuridica"
+            formControlName="codigoNaturezaJuridica"
+          />
+          <div
+            *ngIf="
+              editForm.get('codigoNaturezaJuridica')!.invalid &&
+              (editForm.get('codigoNaturezaJuridica')!.dirty || editForm.get('codigoNaturezaJuridica')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('codigoNaturezaJuridica')?.errors?.maxlength">
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_quantidadeFuncionarios">Quantidade Funcionarios</label>
+          <input
+            type="number"
+            class="form-control"
+            name="quantidadeFuncionarios"
+            id="field_quantidadeFuncionarios"
+            data-cy="quantidadeFuncionarios"
+            formControlName="quantidadeFuncionarios"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_pessoaJuridicaLicenca">Pessoa Juridica Licenca</label>
+          <select
+            class="form-control"
+            id="field_pessoaJuridicaLicenca"
+            data-cy="pessoaJuridicaLicenca"
+            name="pessoaJuridicaLicenca"
+            formControlName="pessoaJuridicaLicenca"
+            [compareWith]="compareLicenca"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="licencaOption" *ngFor="let licencaOption of licencasSharedCollection">{{ licencaOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

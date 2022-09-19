@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100407",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario_filial",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UsuarioFilial",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "filial",
+      "relationshipName": "filial",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

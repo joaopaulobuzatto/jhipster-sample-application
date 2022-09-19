@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="servico">
+      <h2 data-cy="servicoDetailsHeading"><span>Servico</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ servico.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ servico.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ servico.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ servico.descricao }}</span>
+        </dd>
+        <dt><span>Ativo</span></dt>
+        <dd>
+          <span>{{ servico.ativo }}</span>
+        </dd>
+        <dt><span>Valor</span></dt>
+        <dd>
+          <span>{{ servico.valor }}</span>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="servico.usuarioCriador">
+            <a [routerLink]="['/usuario', servico.usuarioCriador.id, 'view']">{{ servico.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/servico', servico.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

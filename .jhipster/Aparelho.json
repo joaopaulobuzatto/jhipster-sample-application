@@ -1,0 +1,58 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100424",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "aparelho",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "classificacaoAparelho",
+      "fieldType": "ClassificacaoAparelho",
+      "fieldValues": "CHIP_MOVEL,APARELHO_MOVEL"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomeTecnico",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "material",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Aparelho",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioCriador",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

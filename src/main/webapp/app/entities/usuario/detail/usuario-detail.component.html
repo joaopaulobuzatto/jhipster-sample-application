@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuario">
+      <h2 data-cy="usuarioDetailsHeading"><span>Usuario</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ usuario.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ usuario.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ usuario.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Senha</span></dt>
+        <dd>
+          <span>{{ usuario.senha }}</span>
+        </dd>
+        <dt><span>Is Admin</span></dt>
+        <dd>
+          <span>{{ usuario.isAdmin }}</span>
+        </dd>
+        <dt><span>Is Suporte</span></dt>
+        <dd>
+          <span>{{ usuario.isSuporte }}</span>
+        </dd>
+        <dt><span>Nome Exibicao</span></dt>
+        <dd>
+          <span>{{ usuario.nomeExibicao }}</span>
+        </dd>
+        <dt><span>Is Consultor</span></dt>
+        <dd>
+          <span>{{ usuario.isConsultor }}</span>
+        </dd>
+        <dt><span>Is Supervisor</span></dt>
+        <dd>
+          <span>{{ usuario.isSupervisor }}</span>
+        </dd>
+        <dt><span>Is Ativo</span></dt>
+        <dd>
+          <span>{{ usuario.isAtivo }}</span>
+        </dd>
+        <dt><span>Is Administrativo</span></dt>
+        <dd>
+          <span>{{ usuario.isAdministrativo }}</span>
+        </dd>
+        <dt><span>Receber Emails</span></dt>
+        <dd>
+          <span>{{ usuario.receberEmails }}</span>
+        </dd>
+        <dt><span>Is Email Valido</span></dt>
+        <dd>
+          <span>{{ usuario.isEmailValido }}</span>
+        </dd>
+        <dt><span>Uuid Email</span></dt>
+        <dd>
+          <span>{{ usuario.uuidEmail }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ usuario.email }}</span>
+        </dd>
+        <dt><span>Is Executor Sac</span></dt>
+        <dd>
+          <span>{{ usuario.isExecutorSac }}</span>
+        </dd>
+        <dt><span>Liberar Horario Feriado</span></dt>
+        <dd>
+          <span>{{ usuario.liberarHorarioFeriado }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="usuario.licenca">
+            <a [routerLink]="['/licenca', usuario.licenca.id, 'view']">{{ usuario.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Supervisor</span></dt>
+        <dd>
+          <div *ngIf="usuario.supervisor">
+            <a [routerLink]="['/usuario', usuario.supervisor.id, 'view']">{{ usuario.supervisor.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="usuario.usuarioCriador">
+            <a [routerLink]="['/usuario', usuario.usuarioCriador.id, 'view']">{{ usuario.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Pessoa Fisica</span></dt>
+        <dd>
+          <div *ngIf="usuario.pessoaFisica">
+            <a [routerLink]="['/pessoa-fisica', usuario.pessoaFisica.id, 'view']">{{ usuario.pessoaFisica.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Horario Trabalho</span></dt>
+        <dd>
+          <div *ngIf="usuario.horarioTrabalho">
+            <a [routerLink]="['/horario-trabalho', usuario.horarioTrabalho.id, 'view']">{{ usuario.horarioTrabalho.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario', usuario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

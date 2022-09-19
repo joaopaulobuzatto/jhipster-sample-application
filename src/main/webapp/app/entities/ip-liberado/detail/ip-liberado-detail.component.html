@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ipLiberado">
+      <h2 data-cy="ipLiberadoDetailsHeading"><span>Ip Liberado</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ ipLiberado.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ ipLiberado.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ ipLiberado.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ ipLiberado.descricao }}</span>
+        </dd>
+        <dt><span>Ip Liberado</span></dt>
+        <dd>
+          <span>{{ ipLiberado.ipLiberado }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="ipLiberado.licenca">
+            <a [routerLink]="['/licenca', ipLiberado.licenca.id, 'view']">{{ ipLiberado.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="ipLiberado.usuarioCriador">
+            <a [routerLink]="['/usuario', ipLiberado.usuarioCriador.id, 'view']">{{ ipLiberado.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ip-liberado', ipLiberado.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

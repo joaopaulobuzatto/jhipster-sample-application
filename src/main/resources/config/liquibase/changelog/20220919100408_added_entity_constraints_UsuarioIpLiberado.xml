@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity UsuarioIpLiberado.
+    -->
+    <changeSet id="20220919100408-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="licenca_id"
+                                 baseTableName="usuario_ip_liberado"
+                                 constraintName="fk_usuario_ip_liberado__licenca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licenca"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="usuario_ip_liberado"
+                                 constraintName="fk_usuario_ip_liberado__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="ip_liberado_id"
+                                 baseTableName="usuario_ip_liberado"
+                                 constraintName="fk_usuario_ip_liberado__ip_liberado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ip_liberado"/>
+    </changeSet>
+</databaseChangeLog>

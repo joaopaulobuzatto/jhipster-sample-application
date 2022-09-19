@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pessoaFisica">
+      <h2 data-cy="pessoaFisicaDetailsHeading"><span>Pessoa Fisica</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ pessoaFisica.id }}</span>
+        </dd>
+        <dt><span>Nome Completo</span></dt>
+        <dd>
+          <span>{{ pessoaFisica.nomeCompleto }}</span>
+        </dd>
+        <dt><span>Cpf</span></dt>
+        <dd>
+          <span>{{ pessoaFisica.cpf }}</span>
+        </dd>
+        <dt><span>Rg</span></dt>
+        <dd>
+          <span>{{ pessoaFisica.rg }}</span>
+        </dd>
+        <dt><span>Data Nascimento</span></dt>
+        <dd>
+          <span>{{ pessoaFisica.dataNascimento | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Pessoa Fisica Licenca</span></dt>
+        <dd>
+          <div *ngIf="pessoaFisica.pessoaFisicaLicenca">
+            <a [routerLink]="['/licenca', pessoaFisica.pessoaFisicaLicenca.id, 'view']">{{ pessoaFisica.pessoaFisicaLicenca.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pessoa-fisica', pessoaFisica.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
