@@ -1,0 +1,116 @@
+<div>
+  <h2 id="page-heading" data-cy="UsuarioGrupoPermissoesHeading">
+    <span>Usuario Grupo Permissoes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-usuario-grupo-permissoes"
+        [routerLink]="['/usuario-grupo-permissoes/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Usuario Grupo Permissoes </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="usuarioGrupoPermissoes?.length === 0">
+    <span>No Usuario Grupo Permissoes found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="usuarioGrupoPermissoes && usuarioGrupoPermissoes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuario.id">
+            <div class="d-flex">
+              <span>Usuario</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="grupoPermissoes.id">
+            <div class="d-flex">
+              <span>Grupo Permissoes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuarioGrupoPermissoes of usuarioGrupoPermissoes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/usuario-grupo-permissoes', usuarioGrupoPermissoes.id, 'view']">{{ usuarioGrupoPermissoes.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="usuarioGrupoPermissoes.licenca">
+              <a [routerLink]="['/licenca', usuarioGrupoPermissoes.licenca.id, 'view']">{{ usuarioGrupoPermissoes.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuarioGrupoPermissoes.usuario">
+              <a [routerLink]="['/usuario', usuarioGrupoPermissoes.usuario.id, 'view']">{{ usuarioGrupoPermissoes.usuario.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="usuarioGrupoPermissoes.grupoPermissoes">
+              <a [routerLink]="['/grupo-permissoes', usuarioGrupoPermissoes.grupoPermissoes.id, 'view']">{{
+                usuarioGrupoPermissoes.grupoPermissoes.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/usuario-grupo-permissoes', usuarioGrupoPermissoes.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/usuario-grupo-permissoes', usuarioGrupoPermissoes.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(usuarioGrupoPermissoes)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

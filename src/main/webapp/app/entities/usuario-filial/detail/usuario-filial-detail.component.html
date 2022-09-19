@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuarioFilial">
+      <h2 data-cy="usuarioFilialDetailsHeading"><span>Usuario Filial</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ usuarioFilial.id }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="usuarioFilial.licenca">
+            <a [routerLink]="['/licenca', usuarioFilial.licenca.id, 'view']">{{ usuarioFilial.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <div *ngIf="usuarioFilial.usuario">
+            <a [routerLink]="['/usuario', usuarioFilial.usuario.id, 'view']">{{ usuarioFilial.usuario.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Filial</span></dt>
+        <dd>
+          <div *ngIf="usuarioFilial.filial">
+            <a [routerLink]="['/filial', usuarioFilial.filial.id, 'view']">{{ usuarioFilial.filial.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario-filial', usuarioFilial.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

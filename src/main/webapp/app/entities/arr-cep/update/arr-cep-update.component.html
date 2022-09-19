@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-arr-cep-heading" data-cy="ArrCepCreateUpdateHeading">Create or edit a Arr Cep</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepnum">Cepnum</label>
+          <input type="text" class="form-control" name="cepnum" id="field_cepnum" data-cy="cepnum" formControlName="cepnum" />
+          <div *ngIf="editForm.get('cepnum')!.invalid && (editForm.get('cepnum')!.dirty || editForm.get('cepnum')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepnum')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('cepnum')?.errors?.maxlength">
+              This field cannot be longer than 8 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cependtip">Cependtip</label>
+          <input type="text" class="form-control" name="cependtip" id="field_cependtip" data-cy="cependtip" formControlName="cependtip" />
+          <div *ngIf="editForm.get('cependtip')!.invalid && (editForm.get('cependtip')!.dirty || editForm.get('cependtip')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cependtip')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepend">Cepend</label>
+          <input type="text" class="form-control" name="cepend" id="field_cepend" data-cy="cepend" formControlName="cepend" />
+          <div *ngIf="editForm.get('cepend')!.invalid && (editForm.get('cepend')!.dirty || editForm.get('cepend')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepend')?.errors?.maxlength">
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cependcompl">Cependcompl</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cependcompl"
+            id="field_cependcompl"
+            data-cy="cependcompl"
+            formControlName="cependcompl"
+          />
+          <div *ngIf="editForm.get('cependcompl')!.invalid && (editForm.get('cependcompl')!.dirty || editForm.get('cependcompl')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cependcompl')?.errors?.maxlength">
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepbai">Cepbai</label>
+          <input type="text" class="form-control" name="cepbai" id="field_cepbai" data-cy="cepbai" formControlName="cepbai" />
+          <div *ngIf="editForm.get('cepbai')!.invalid && (editForm.get('cepbai')!.dirty || editForm.get('cepbai')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepbai')?.errors?.maxlength">
+              This field cannot be longer than 255 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepcid">Cepcid</label>
+          <input type="text" class="form-control" name="cepcid" id="field_cepcid" data-cy="cepcid" formControlName="cepcid" />
+          <div *ngIf="editForm.get('cepcid')!.invalid && (editForm.get('cepcid')!.dirty || editForm.get('cepcid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepcid')?.errors?.maxlength">
+              This field cannot be longer than 8 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepmuncod">Cepmuncod</label>
+          <input type="number" class="form-control" name="cepmuncod" id="field_cepmuncod" data-cy="cepmuncod" formControlName="cepmuncod" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepmunnom">Cepmunnom</label>
+          <input type="text" class="form-control" name="cepmunnom" id="field_cepmunnom" data-cy="cepmunnom" formControlName="cepmunnom" />
+          <div *ngIf="editForm.get('cepmunnom')!.invalid && (editForm.get('cepmunnom')!.dirty || editForm.get('cepmunnom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepmunnom')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cepmunuf">Cepmunuf</label>
+          <input type="text" class="form-control" name="cepmunuf" id="field_cepmunuf" data-cy="cepmunuf" formControlName="cepmunuf" />
+          <div *ngIf="editForm.get('cepmunuf')!.invalid && (editForm.get('cepmunuf')!.dirty || editForm.get('cepmunuf')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cepmunuf')?.errors?.maxlength">
+              This field cannot be longer than 2 characters.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100411",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "detentor_anexo_arquivo",
+  "fields": [
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DetentorAnexoArquivo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioCriador",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

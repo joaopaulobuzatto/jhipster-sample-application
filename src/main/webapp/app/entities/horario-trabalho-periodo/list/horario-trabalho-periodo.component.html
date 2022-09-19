@@ -1,0 +1,188 @@
+<div>
+  <h2 id="page-heading" data-cy="HorarioTrabalhoPeriodoHeading">
+    <span>Horario Trabalho Periodos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-horario-trabalho-periodo"
+        [routerLink]="['/horario-trabalho-periodo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Horario Trabalho Periodo </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="horarioTrabalhoPeriodos?.length === 0">
+    <span>No Horario Trabalho Periodos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="horarioTrabalhoPeriodos && horarioTrabalhoPeriodos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dataCriacao">
+            <div class="d-flex">
+              <span>Data Criacao</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="diaDaSemana">
+            <div class="d-flex">
+              <span>Dia Da Semana</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo1Inicio">
+            <div class="d-flex">
+              <span>Periodo 1 Inicio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo1Fim">
+            <div class="d-flex">
+              <span>Periodo 1 Fim</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo2Inicio">
+            <div class="d-flex">
+              <span>Periodo 2 Inicio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo2Fim">
+            <div class="d-flex">
+              <span>Periodo 2 Fim</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo3Inicio">
+            <div class="d-flex">
+              <span>Periodo 3 Inicio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo3Fim">
+            <div class="d-flex">
+              <span>Periodo 3 Fim</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo4Inicio">
+            <div class="d-flex">
+              <span>Periodo 4 Inicio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="periodo4Fim">
+            <div class="d-flex">
+              <span>Periodo 4 Fim</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="usuarioCriador.id">
+            <div class="d-flex">
+              <span>Usuario Criador</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="horarioTrabalho.id">
+            <div class="d-flex">
+              <span>Horario Trabalho</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let horarioTrabalhoPeriodo of horarioTrabalhoPeriodos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/horario-trabalho-periodo', horarioTrabalhoPeriodo.id, 'view']">{{ horarioTrabalhoPeriodo.id }}</a>
+          </td>
+          <td>{{ horarioTrabalhoPeriodo.dataCriacao | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.diaDaSemana }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo1Inicio | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo1Fim | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo2Inicio | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo2Fim | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo3Inicio | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo3Fim | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo4Inicio | formatMediumDatetime }}</td>
+          <td>{{ horarioTrabalhoPeriodo.periodo4Fim | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="horarioTrabalhoPeriodo.licenca">
+              <a [routerLink]="['/licenca', horarioTrabalhoPeriodo.licenca.id, 'view']">{{ horarioTrabalhoPeriodo.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="horarioTrabalhoPeriodo.usuarioCriador">
+              <a [routerLink]="['/usuario', horarioTrabalhoPeriodo.usuarioCriador.id, 'view']">{{
+                horarioTrabalhoPeriodo.usuarioCriador.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="horarioTrabalhoPeriodo.horarioTrabalho">
+              <a [routerLink]="['/horario-trabalho', horarioTrabalhoPeriodo.horarioTrabalho.id, 'view']">{{
+                horarioTrabalhoPeriodo.horarioTrabalho.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/horario-trabalho-periodo', horarioTrabalhoPeriodo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/horario-trabalho-periodo', horarioTrabalhoPeriodo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(horarioTrabalhoPeriodo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

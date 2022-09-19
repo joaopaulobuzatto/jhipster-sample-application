@@ -1,0 +1,26 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100431",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "oferta_servico",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OfertaServico",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "oferta",
+      "relationshipName": "oferta",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "servico",
+      "relationshipName": "servico",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

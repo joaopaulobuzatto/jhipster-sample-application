@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100430",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "oferta",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Oferta",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioCriador",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "plano",
+      "relationshipName": "plano",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

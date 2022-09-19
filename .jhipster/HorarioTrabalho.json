@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100420",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "horario_trabalho",
+  "fields": [
+    {
+      "fieldName": "codigo",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HorarioTrabalho",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioCriador",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

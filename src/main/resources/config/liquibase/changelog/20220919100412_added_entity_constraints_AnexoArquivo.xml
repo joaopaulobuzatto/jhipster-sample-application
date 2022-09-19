@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity AnexoArquivo.
+    -->
+    <changeSet id="20220919100412-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="licenca_id"
+                                 baseTableName="anexo_arquivo"
+                                 constraintName="fk_anexo_arquivo__licenca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="licenca"/>
+
+        <addForeignKeyConstraint baseColumnNames="usuario_criador_id"
+                                 baseTableName="anexo_arquivo"
+                                 constraintName="fk_anexo_arquivo__usuario_criador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="detentor_anexo_arquivo_id"
+                                 baseTableName="anexo_arquivo"
+                                 constraintName="fk_anexo_arquivo__detentor_anexo_arquivo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="detentor_anexo_arquivo"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_de_documento_anexavel_id"
+                                 baseTableName="anexo_arquivo"
+                                 constraintName="fk_anexo_arquivo__tipo_de_documento_anexavel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipo_de_documento_anexavel"/>
+    </changeSet>
+</databaseChangeLog>

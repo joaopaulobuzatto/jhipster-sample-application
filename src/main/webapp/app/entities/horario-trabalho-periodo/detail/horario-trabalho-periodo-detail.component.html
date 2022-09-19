@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="horarioTrabalhoPeriodo">
+      <h2 data-cy="horarioTrabalhoPeriodoDetailsHeading"><span>Horario Trabalho Periodo</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.id }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Dia Da Semana</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.diaDaSemana }}</span>
+        </dd>
+        <dt><span>Periodo 1 Inicio</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo1Inicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 1 Fim</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo1Fim | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 2 Inicio</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo2Inicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 2 Fim</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo2Fim | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 3 Inicio</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo3Inicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 3 Fim</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo3Fim | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 4 Inicio</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo4Inicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Periodo 4 Fim</span></dt>
+        <dd>
+          <span>{{ horarioTrabalhoPeriodo.periodo4Fim | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="horarioTrabalhoPeriodo.licenca">
+            <a [routerLink]="['/licenca', horarioTrabalhoPeriodo.licenca.id, 'view']">{{ horarioTrabalhoPeriodo.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="horarioTrabalhoPeriodo.usuarioCriador">
+            <a [routerLink]="['/usuario', horarioTrabalhoPeriodo.usuarioCriador.id, 'view']">{{
+              horarioTrabalhoPeriodo.usuarioCriador.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span>Horario Trabalho</span></dt>
+        <dd>
+          <div *ngIf="horarioTrabalhoPeriodo.horarioTrabalho">
+            <a [routerLink]="['/horario-trabalho', horarioTrabalhoPeriodo.horarioTrabalho.id, 'view']">{{
+              horarioTrabalhoPeriodo.horarioTrabalho.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/horario-trabalho-periodo', horarioTrabalhoPeriodo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

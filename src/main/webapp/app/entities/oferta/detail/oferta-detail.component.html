@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="oferta">
+      <h2 data-cy="ofertaDetailsHeading"><span>Oferta</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ oferta.id }}</span>
+        </dd>
+        <dt><span>Codigo</span></dt>
+        <dd>
+          <span>{{ oferta.codigo }}</span>
+        </dd>
+        <dt><span>Data Criacao</span></dt>
+        <dd>
+          <span>{{ oferta.dataCriacao | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Descricao</span></dt>
+        <dd>
+          <span>{{ oferta.descricao }}</span>
+        </dd>
+        <dt><span>Ativo</span></dt>
+        <dd>
+          <span>{{ oferta.ativo }}</span>
+        </dd>
+        <dt><span>Valor</span></dt>
+        <dd>
+          <span>{{ oferta.valor }}</span>
+        </dd>
+        <dt><span>Usuario Criador</span></dt>
+        <dd>
+          <div *ngIf="oferta.usuarioCriador">
+            <a [routerLink]="['/usuario', oferta.usuarioCriador.id, 'view']">{{ oferta.usuarioCriador.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Plano</span></dt>
+        <dd>
+          <div *ngIf="oferta.plano">
+            <a [routerLink]="['/plano', oferta.plano.id, 'view']">{{ oferta.plano.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/oferta', oferta.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

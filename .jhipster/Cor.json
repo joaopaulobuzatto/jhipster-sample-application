@@ -1,0 +1,22 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100426",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cor",
+  "fields": [
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

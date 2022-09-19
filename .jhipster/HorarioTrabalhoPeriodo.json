@@ -1,0 +1,75 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100421",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "horario_trabalho_periodo",
+  "fields": [
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "diaDaSemana",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "periodo1Inicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo1Fim",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo2Inicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo2Fim",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo3Inicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo3Fim",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo4Inicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "periodo4Fim",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HorarioTrabalhoPeriodo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuarioCriador",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "horarioTrabalho",
+      "relationshipName": "horarioTrabalho",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

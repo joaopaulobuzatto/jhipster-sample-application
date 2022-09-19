@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20220919100406",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario_grupo_permissoes",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UsuarioGrupoPermissoes",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "licenca",
+      "relationshipName": "licenca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "usuario",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "grupoPermissoes",
+      "relationshipName": "grupoPermissoes",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

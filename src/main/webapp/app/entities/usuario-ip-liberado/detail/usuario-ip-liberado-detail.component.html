@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="usuarioIpLiberado">
+      <h2 data-cy="usuarioIpLiberadoDetailsHeading"><span>Usuario Ip Liberado</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ usuarioIpLiberado.id }}</span>
+        </dd>
+        <dt><span>Licenca</span></dt>
+        <dd>
+          <div *ngIf="usuarioIpLiberado.licenca">
+            <a [routerLink]="['/licenca', usuarioIpLiberado.licenca.id, 'view']">{{ usuarioIpLiberado.licenca.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <div *ngIf="usuarioIpLiberado.usuario">
+            <a [routerLink]="['/usuario', usuarioIpLiberado.usuario.id, 'view']">{{ usuarioIpLiberado.usuario.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Ip Liberado</span></dt>
+        <dd>
+          <div *ngIf="usuarioIpLiberado.ipLiberado">
+            <a [routerLink]="['/ip-liberado', usuarioIpLiberado.ipLiberado.id, 'view']">{{ usuarioIpLiberado.ipLiberado.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/usuario-ip-liberado', usuarioIpLiberado.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

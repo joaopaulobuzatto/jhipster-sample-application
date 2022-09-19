@@ -17,7 +17,60 @@
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100405_added_entity_Usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100406_added_entity_UsuarioGrupoPermissoes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100407_added_entity_UsuarioFilial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100408_added_entity_UsuarioIpLiberado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100409_added_entity_GrupoPermissoes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100410_added_entity_IpLiberado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100411_added_entity_DetentorAnexoArquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100412_added_entity_AnexoArquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100413_added_entity_TipoDeDocumentoAnexavel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100414_added_entity_Licenca.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100415_added_entity_Endereco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100416_added_entity_Operadora.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100417_added_entity_Pessoa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100418_added_entity_PessoaFisica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100419_added_entity_PessoaJuridica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100420_added_entity_HorarioTrabalho.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100421_added_entity_HorarioTrabalhoPeriodo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100422_added_entity_Origem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100423_added_entity_Filial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100424_added_entity_Aparelho.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100425_added_entity_ArrCep.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100426_added_entity_Cor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100427_added_entity_EventoAgenda.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100428_added_entity_Feriado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100429_added_entity_Plano.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100430_added_entity_Oferta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100431_added_entity_OfertaServico.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100432_added_entity_Servico.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20220919100405_added_entity_constraints_Usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100406_added_entity_constraints_UsuarioGrupoPermissoes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100407_added_entity_constraints_UsuarioFilial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100408_added_entity_constraints_UsuarioIpLiberado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100409_added_entity_constraints_GrupoPermissoes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100410_added_entity_constraints_IpLiberado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100411_added_entity_constraints_DetentorAnexoArquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100412_added_entity_constraints_AnexoArquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100413_added_entity_constraints_TipoDeDocumentoAnexavel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100414_added_entity_constraints_Licenca.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100415_added_entity_constraints_Endereco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100417_added_entity_constraints_Pessoa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100418_added_entity_constraints_PessoaFisica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100419_added_entity_constraints_PessoaJuridica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100420_added_entity_constraints_HorarioTrabalho.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100421_added_entity_constraints_HorarioTrabalhoPeriodo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100422_added_entity_constraints_Origem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100423_added_entity_constraints_Filial.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100424_added_entity_constraints_Aparelho.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100427_added_entity_constraints_EventoAgenda.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100428_added_entity_constraints_Feriado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100429_added_entity_constraints_Plano.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100430_added_entity_constraints_Oferta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100431_added_entity_constraints_OfertaServico.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220919100432_added_entity_constraints_Servico.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

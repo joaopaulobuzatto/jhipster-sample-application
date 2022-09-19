@@ -1,0 +1,144 @@
+<div>
+  <h2 id="page-heading" data-cy="ArrCepHeading">
+    <span>Arr Ceps</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-arr-cep"
+        [routerLink]="['/arr-cep/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Arr Cep </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="arrCeps?.length === 0">
+    <span>No Arr Ceps found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="arrCeps && arrCeps.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepnum">
+            <div class="d-flex">
+              <span>Cepnum</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cependtip">
+            <div class="d-flex">
+              <span>Cependtip</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepend">
+            <div class="d-flex">
+              <span>Cepend</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cependcompl">
+            <div class="d-flex">
+              <span>Cependcompl</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepbai">
+            <div class="d-flex">
+              <span>Cepbai</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepcid">
+            <div class="d-flex">
+              <span>Cepcid</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepmuncod">
+            <div class="d-flex">
+              <span>Cepmuncod</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepmunnom">
+            <div class="d-flex">
+              <span>Cepmunnom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cepmunuf">
+            <div class="d-flex">
+              <span>Cepmunuf</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let arrCep of arrCeps; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/arr-cep', arrCep.id, 'view']">{{ arrCep.id }}</a>
+          </td>
+          <td>{{ arrCep.cepnum }}</td>
+          <td>{{ arrCep.cependtip }}</td>
+          <td>{{ arrCep.cepend }}</td>
+          <td>{{ arrCep.cependcompl }}</td>
+          <td>{{ arrCep.cepbai }}</td>
+          <td>{{ arrCep.cepcid }}</td>
+          <td>{{ arrCep.cepmuncod }}</td>
+          <td>{{ arrCep.cepmunnom }}</td>
+          <td>{{ arrCep.cepmunuf }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/arr-cep', arrCep.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/arr-cep', arrCep.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(arrCep)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

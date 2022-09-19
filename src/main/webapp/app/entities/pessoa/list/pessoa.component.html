@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="PessoaHeading">
+    <span>Pessoas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pessoa"
+        [routerLink]="['/pessoa/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Pessoa </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pessoas?.length === 0">
+    <span>No Pessoas found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="pessoas && pessoas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email1">
+            <div class="d-flex">
+              <span>Email 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telefone1">
+            <div class="d-flex">
+              <span>Telefone 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="endereco.id">
+            <div class="d-flex">
+              <span>Endereco</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="licenca.id">
+            <div class="d-flex">
+              <span>Licenca</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="operadoraTelefone1.id">
+            <div class="d-flex">
+              <span>Operadora Telefone 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pessoa of pessoas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pessoa', pessoa.id, 'view']">{{ pessoa.id }}</a>
+          </td>
+          <td>{{ pessoa.email1 }}</td>
+          <td>{{ pessoa.telefone1 }}</td>
+          <td>
+            <div *ngIf="pessoa.endereco">
+              <a [routerLink]="['/endereco', pessoa.endereco.id, 'view']">{{ pessoa.endereco.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="pessoa.licenca">
+              <a [routerLink]="['/licenca', pessoa.licenca.id, 'view']">{{ pessoa.licenca.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="pessoa.operadoraTelefone1">
+              <a [routerLink]="['/operadora', pessoa.operadoraTelefone1.id, 'view']">{{ pessoa.operadoraTelefone1.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pessoa)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
