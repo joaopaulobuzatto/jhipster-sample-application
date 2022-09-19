@@ -1,0 +1,307 @@
+entity Usuario {
+	codigo Long
+    dataCriacao Instant required
+    senha String maxlength(70) required
+    isAdmin Boolean required
+    isSuporte Boolean required
+    nomeExibicao String maxlength(70) required
+    isConsultor Boolean required
+    isSupervisor Boolean required
+    isAtivo Boolean required
+    isAdministrativo Boolean
+    receberEmails Boolean required
+    isEmailValido Boolean required
+    uuidEmail String maxlength(50)
+    email String maxlength(100) required
+    isExecutorSac Boolean required
+    liberarHorarioFeriado Boolean
+}
+
+entity UsuarioGrupoPermissoes {
+}
+
+entity UsuarioFilial {
+}
+
+entity UsuarioIpLiberado {
+}
+
+entity GrupoPermissoes {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(50) required
+}
+
+entity IpLiberado {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(70) required
+    ipLiberado String maxlength(15) required
+}
+
+entity DetentorAnexoArquivo {
+	dataCriacao Instant required
+}
+
+entity AnexoArquivo {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    nomeNuvem String maxlength(255) required
+    nomeOriginal String maxlength(255)
+    tipoOrigemAnexoArquivo TipoOrigemAnexoArquivo
+}
+
+enum TipoOrigemAnexoArquivo {
+	CONFIGURACAO_SISTEMA
+    PROCESSO_IMPORTACAO_CLIENTES
+    PROCESSO_ATUALIZACAO_TELEFONES_CLIENTES
+    CLIENTES
+    SAC
+    PROCESSO_IMPORTACAO_LEAD
+    CONTESTACAO_LEAD
+    PEDIDOS
+    TRANSFERENCIA_CARTEIRA_CONSULTOR
+    ITEM_CORRECAO
+    NOTIFICACAO_GERAL
+    USUARIO_LOG_OPERACAO
+}
+
+entity TipoDeDocumentoAnexavel {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(50) required
+}
+
+entity Licenca {
+	codigo Long
+    dataCriacao Instant required
+    dataInicioUtilizacao Instant
+    dataInicioFaturamento Instant
+    dataPrimeiroVencimentoBoleto Instant
+    diaVencimentoBoleto Integer
+    produtosContratados String maxlength(300)
+    valoresNegociados String maxlength(300)
+    contratacaoBloqueioIps Boolean required
+    contratacaoEmailProposta Boolean required
+    criarPedido Boolean
+    criarNegociacoes Boolean
+    sincronizarDadosCadastroCliente Boolean
+    sincronizarDadosCarteiraCliente Boolean
+    bloqueioAcesso Boolean required
+    dataBloqueioAcesso Instant required
+    motivoBloqueioAcesso String maxlength(2500)
+    mensagemBloqueioAcesso String maxlength(150)
+}
+
+entity Endereco {
+	cep String maxlength(20)
+    logradouro String maxlength(100)
+    numero String maxlength(20)
+    bairro String maxlength(100)
+    complemento String maxlength(100)
+    pontoReferencia String maxlength(100)
+    cidade String maxlength(100)
+    uf String maxlength(2)
+}
+
+entity Operadora {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    ativo Boolean required
+}
+
+entity Pessoa {
+	email1 String maxlength(100)
+    telefone1 String maxlength(11)
+}
+
+entity PessoaFisica {
+	nomeCompleto String maxlength(100) required
+	cpf String maxlength(14)
+    rg String maxlength(15)
+    dataNascimento Instant
+}
+
+entity PessoaJuridica {
+	cnpj String maxlength(14)
+    razaoSocial String maxlength(200)
+    nomeFantasia String maxlength(200) required
+    codigoCnae String maxlength(50)
+    dataAbertura Instant
+    codigoCnaePrincipal String maxlength(50)
+    codigoNaturezaJuridica String maxlength(50)
+    quantidadeFuncionarios Integer
+}
+
+entity HorarioTrabalho {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(255) required
+}
+
+entity HorarioTrabalhoPeriodo {
+	dataCriacao Instant required
+    diaDaSemana String maxlength(50)
+    periodo1Inicio Instant
+    periodo1Fim Instant
+    periodo2Inicio Instant
+    periodo2Fim Instant
+    periodo3Inicio Instant
+    periodo3Fim Instant
+    periodo4Inicio Instant
+    periodo4Fim Instant
+}
+
+entity Origem {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    tipo TipoOrigem required
+}
+
+enum TipoOrigem {
+	CLIENTE, LEAD, MAILING
+}
+
+entity Filial {
+	dataCriacao Instant
+}
+
+entity Aparelho {
+	codigo String
+    dataCriacao Instant required
+    classificacaoAparelho ClassificacaoAparelho
+    descricao String required
+    nomeTecnico String required
+    material String
+    valor BigDecimal
+    ativo Boolean
+}
+
+enum ClassificacaoAparelho {
+	CHIP_MOVEL
+	APARELHO_MOVEL
+}
+
+entity ArrCep {
+	cepnum String maxlength(8) required
+    cependtip String maxlength(100)
+    cepend String maxlength(255)
+    cependcompl String maxlength(255)
+    cepbai String maxlength(255)
+    cepcid String maxlength(8)
+    cepmuncod Integer
+    cepmunnom String maxlength(100)
+    cepmunuf String maxlength(2)
+}
+
+entity Cor {
+	descricao String maxlength(50) required
+}
+
+entity EventoAgenda {
+	dataCriacao Instant required
+    data Instant required
+    descricao String maxlength(255) required
+}
+
+entity Feriado {
+	codigo Long
+    dataCriacao Instant required
+    data Instant required
+    nome String maxlength(50) required
+}
+
+entity Plano {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    ativo Boolean required
+}
+
+entity Oferta {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    ativo Boolean required
+    valor BigDecimal required
+}
+
+entity OfertaServico {
+}
+
+entity Servico {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    ativo Boolean required
+    valor BigDecimal required
+}
+
+relationship ManyToOne {
+	Usuario{licenca} to Licenca
+    Usuario{supervisor} to Usuario
+    Usuario{usuarioCriador} to Usuario
+    Usuario{pessoaFisica} to PessoaFisica
+    Usuario{horarioTrabalho} to HorarioTrabalho
+    UsuarioGrupoPermissoes{licenca} to Licenca
+    UsuarioGrupoPermissoes{usuario} to Usuario
+    UsuarioGrupoPermissoes{grupoPermissoes} to GrupoPermissoes
+    UsuarioFilial{licenca} to Licenca
+    UsuarioFilial{usuario} to Usuario
+    UsuarioFilial{filial} to Filial
+    UsuarioIpLiberado{licenca} to Licenca
+    UsuarioIpLiberado{usuario} to Usuario
+    UsuarioIpLiberado{ipLiberado} to IpLiberado
+    GrupoPermissoes{licenca} to Licenca
+    GrupoPermissoes{usuarioCriador} to Usuario
+    IpLiberado{licenca} to Licenca
+    IpLiberado{usuarioCriador} to Usuario
+    DetentorAnexoArquivo{licenca} to Licenca
+    DetentorAnexoArquivo{usuarioCriador} to Usuario
+    TipoDeDocumentoAnexavel{licenca} to Licenca
+    TipoDeDocumentoAnexavel{usuarioCriador} to Usuario
+    AnexoArquivo{licenca} to Licenca
+    AnexoArquivo{usuarioCriador} to Usuario
+    AnexoArquivo{detentorAnexoArquivo} to DetentorAnexoArquivo
+    AnexoArquivo{tipoDeDocumentoAnexavel} to TipoDeDocumentoAnexavel
+    Pessoa{licenca} to Licenca
+    Pessoa{operadoraTelefone1} to Operadora
+    PessoaFisica{pessoaFisicaLicenca} to Licenca
+    PessoaJuridica{pessoaJuridicaLicenca} to Licenca
+    HorarioTrabalho{licenca} to Licenca
+    HorarioTrabalho{usuarioCriador} to Usuario
+    HorarioTrabalhoPeriodo{licenca} to Licenca
+    HorarioTrabalhoPeriodo{usuarioCriador} to Usuario
+    HorarioTrabalhoPeriodo{horarioTrabalho} to HorarioTrabalho
+    Licenca{pessoa} to Pessoa
+    Licenca{pessoaResponsavel} to PessoaFisica
+    Licenca{pessoaFinanceiro} to PessoaFisica
+    Licenca{usuarioSuporte} to Usuario
+    Licenca{usuarioRobo} to Usuario
+    Licenca{filialPadrao} to Filial
+    Endereco{licenca} to Licenca
+    Origem{licenca} to Licenca
+    Origem{usuarioCriador} to Usuario
+    Filial{licenca} to Licenca
+    Filial{pessoa} to PessoaJuridica
+    Filial{usuarioCriador} to Usuario
+    Aparelho{usuarioCriador} to Usuario
+    EventoAgenda{licenca} to Licenca
+    EventoAgenda{usuarioCriador} to Usuario
+    EventoAgenda{usuarioResponsavel} to Usuario
+    Feriado{licenca} to Licenca
+    Feriado{usuarioCriador} to Usuario
+    Plano{usuarioCriador} to Usuario
+    Oferta{usuarioCriador} to Usuario
+    Oferta{plano} to Plano
+    OfertaServico{oferta} to Oferta
+    OfertaServico{servico} to Servico
+    Servico{usuarioCriador} to Usuario
+}
+
+relationship OneToOne {
+	Pessoa{endereco} to Endereco
+}
