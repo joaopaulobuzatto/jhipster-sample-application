@@ -1,0 +1,1130 @@
+
+
+entity Versao {
+
+}
+
+enum TipoNotaVersao {
+    MELHORIA
+    NOVA_FUNCIONALIDADE
+    BUG
+}
+
+entity NotaVersao {
+    //versao_id
+    titulo String maxlength(255) required
+    descricao String maxlength(255) required
+    ticket String maxlength(10)
+    tipo TipoNotaVersao
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+	NotaVersao{versao} to Versao
+    NotaVersao{usuarioCriador} to Usuario
+}
+
+entity Status {
+
+}
+
+entity StatusPedido {
+
+}
+
+entity StatusPersonalizado {
+
+}
+
+entity StatusPersonalizadoPedido {
+
+}
+
+entity Pedido {
+
+}
+
+enum TipoNegociacaoPedido {
+    FRESH
+    BASE
+    MIGRACAO
+    MIGRACAO_UPGRADE
+    MIGRACAO_DOWNGRADE
+    TROCA
+    MIGRACAO_TROCA
+    MIGRACAO_TROCA_UPGRADE
+    MIGRACAO_TROCA_DOWNGRADE
+    ADICAO_SERVICO
+    TT
+    PP
+    PP_ENVIO_APARELHO
+    RENOVACAO
+    RENOVACAO_COM_DELTA
+    M2M
+    TOTALIZACAO
+}
+
+enum TipoModalidadeVendaAparelho {
+    VENDA_FACILITADA
+    COMODATO
+    INDEFINIDO
+}
+
+enum TipoRemuneracao {
+    DOWNGRADE
+    RECOMENDACAO
+    UPGRADE
+}
+
+enum TipoPortabilidade {
+    CPF_CNPJ
+    CNPJ_CNPJ
+    CPF_PRE_PAGO_CNPJ
+}
+
+entity Negociacao {
+    tipo TipoNegociacaoPedido required
+    quantidadeLinhas Integer required
+    portabilidade Boolean required
+    //plano_id
+    //oferta_id
+    //pedido_id
+    //usuario_criador_id
+    dataCriacao Instant required
+    ddd String maxlength(2)
+    campanhaSiebel String maxlength(50)
+    valorBruto BigDecimal
+    aparelhoValor BigDecimal
+    //licenca_id
+    //aparelho_id
+    quantidadeParcelas Integer
+    modalidadeVendaAparelho TipoModalidadeVendaAparelho
+    valorLiquido BigDecimal
+    percentualImposto BigDecimal
+    tipoRemuneracao TipoRemuneracao
+    vivoTotal Boolean required
+    tipoPortabilidade TipoPortabilidade
+}
+
+relationship ManyToOne {
+	Negociacao{plano} to Plano
+    Negociacao{oferta} to Oferta
+    Negociacao{pedido} to Pedido
+    Negociacao{usuarioCriador} to Usuario
+    Negociacao{licenca} to Licenca
+    Negociacao{aparelho} to Aparelho
+}
+
+entity NegociacaoServico {
+    //negociacao_id
+    //servico_id
+    valorBruto BigDecimal required
+    //licenca_id
+    valorLiquido BigDecimal
+    percentualImposto BigDecimal
+}
+
+relationship ManyToOne {
+	NegociacaoServico{negociacao} to Negociacao
+    NegociacaoServico{servico} to Servico
+    NegociacaoServico{licenca} to Licenca
+}
+
+enum StatusLinhaVivoCorp {
+    ATIVO
+    SUSPENSO
+    INATIVO
+    BLOQUEADO
+    NAO_ENCONTRADO
+    DESCONHECIDO
+}
+
+enum StatusPortabilidadeLinha {
+    AUTORIZADO
+    PORTADO
+    NEGADO
+    PORTABILIDADE_CANCELADA
+    PORTABILIDADE_SOLICITADA
+    AGUARDANDO_PROTOCOLO
+    ERRO
+}
+
+enum StatusLinhaCarteira {
+    ATIVO
+    SUSPENSO
+    INADIMPLENTE
+    INVASAO
+    CANCELADO
+    CARTEIRA_TOP
+    VIVO_ONE
+    CLIENTE_DE_PARA
+    INVASAO_BASE_ZERO
+    INVASAO_BASE_ATIVA
+}
+
+entity Linha {
+    //negociacao_id
+    //operadora_doadora_id
+    numero String maxlength(11)
+    numeroPortado String maxlength(11)
+    dataAtivacao Instant
+    dataCriacao Instant required
+    iccid String maxlength(30)
+    ultimaConsultaStatusVivocorp Instant
+    statusVivocorp StatusLinhaVivoCorp
+    ultimaConsultaDadosVivocorp Instant
+    statusPortabilidade StatusPortabilidadeLinha
+    //usuario_ativador_id
+    dataPortabilidade Instant
+    //licenca_id
+    dataCancelamento Instant
+    dataSuspensao Instant
+    dataRealizacaoAtivacao Instant
+    dataAlteracaoStatusLinha Instant
+    statusLinhaCarteira StatusLinhaCarteira
+    observacaoStatusLinhaCarteirao String maxlength(2500)
+}
+
+relationship ManyToOne {
+	Linha{negociacao} to Negociacao
+    Linha{operadoraDoadora} to Operadora
+    Linha{usuarioAtivador} to Usuario
+    Linha{licenca} to Licenca
+}
+
+entity Operadora {
+
+}
+
+enum TipoMotivo {
+    NEGOCIO_PERDA
+    NEGOCIO_ARQUIVAMENTO
+    NEGOCIO_PROPOSTA_RECUSA
+    NEGOCIO_PROPOSTA_CANCELAMENTO
+    SAC
+    ALTERACAO_STATUS_PEDIDO
+    CONTESTACAO_LEAD
+    TRANSFERENCIA_CARTEIRA_CONSULTOR
+}
+
+entity Motivo {
+    codigo Long required
+    descricao String maxlength(200) required
+    tipo TipoMotivo required
+    //usuario_criador_id
+    dataCriacao Instant required
+    //licenca_id
+}
+
+relationship ManyToOne {
+	Motivo{usuarioCriador} to Usuario
+    Motivo{licenca} to Licenca
+}
+
+entity InformacaoAdicionalMotivo {
+    //motivo_id
+    nome String maxlength(100) required
+    obrigatorio Boolean required
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+	InformacaoAdicionalMotivo{motivo} to Motivo
+    InformacaoAdicionalMotivo{usuarioCriador} to Usuario
+}
+
+entity AlteracaoPedido {
+    //usuario_responsavel_id
+    //status_anterior_id
+    //status_resultante_id
+    dataAlteracao Instant required
+    observacao String maxlength(5000)
+    //pedido_id
+    //licenca_id
+    //motivo_alteracao_status_id
+    //status_personalizado_anterior_id
+    //status_personalizado_resultante_id
+    //sub_status_anterior_id
+    //sub_status_resultante_id
+    dataCadastroCotacaoOrdem Instant
+    dataAlteracaoCotacaoOrdem Instant
+    conteudoAnteriorCotacaoOrdem String maxlength(50)
+}
+
+relationship ManyToOne {
+	AlteracaoPedido{usuarioResponsavel} to Usuario
+    AlteracaoPedido{statusAnterior} to StatusPedido
+    AlteracaoPedido{statusResultante} to StatusPedido
+    AlteracaoPedido{subStatusAnterior} to StatusPedido
+    AlteracaoPedido{subStatusResultante} to StatusPedido
+    AlteracaoPedido{pedido} to Pedido
+	AlteracaoPedido{licenca} to Licenca
+    AlteracaoPedido{motivoAlteracaoStatus} to Motivo
+    AlteracaoPedido{statusPersonalizadoAnterior} to StatusPersonalizadoPedido
+    AlteracaoPedido{statusPersonalizadoResultante} to StatusPersonalizadoPedido
+}
+
+entity DetentorAnexoArquivo {
+    //usuario_criador_id
+    dataCriacao Instant required
+    //licenca_id
+}
+
+relationship ManyToOne {
+	DetentorAnexoArquivo{usuarioCriador} to Usuario
+    DetentorAnexoArquivo{licenca} to Licenca
+}
+
+entity TipoDeDocumentoAnexavel {
+
+}
+
+enum TipoOrigemAnexoArquivo {
+    CONFIGURACAO_SISTEMA
+    PROCESSO_IMPORTACAO_CLIENTES
+    PROCESSO_ATUALIZACAO_TELEFONES_CLIENTES
+    CLIENTES
+    SAC
+    PROCESSO_IMPORTACAO_LEAD
+    CONTESTACAO_LEAD
+    PEDIDOS
+    TRANSFERENCIA_CARTEIRA_CONSULTOR
+    ITEM_CORRECAO
+    NOTIFICACAO_GERAL
+    USUARIO_LOG_OPERACAO
+}
+
+entity AnexoArquivo {
+    //detentor_anexo_arquivo_id
+    codigo Long required
+    descricao String maxlength(100)
+    nomeNuvem String maxlength(255) required
+    nomeOriginal String maxlength(255) required
+    //usuario_criador_id
+    dataCriacao Instant required
+    //licenca_id
+    tipoOrigemAnexoArquivo TipoOrigemAnexoArquivo
+    //tipo_de_documento_anexavel_id
+}
+
+relationship ManyToOne {
+	AnexoArquivo{detentorAnexoArquivo} to DetentorAnexoArquivo
+    AnexoArquivo{usuarioCriador} to Usuario
+    AnexoArquivo{licenca} to Licenca
+    AnexoArquivo{tipoDeDocumentoAnexavel} to TipoDeDocumentoAnexavel
+}
+
+enum TipoPedido {
+    MOVEL
+    FIXO
+    VSTI
+    AVANCADA
+    TI
+}
+
+enum ClassificacaoAparelho {
+    CHIP_MOVEL
+    APARELHO_MOVEL
+}
+
+entity Aparelho {
+    codigo Long required
+    descricao String maxlength(100) required
+    valor BigDecimal required
+    ativo Boolean required
+    //usuario_criador_id
+    dataCriacao Instant required
+    nomeTecnico String maxlength(255) required
+    material String maxlength(50)
+    tipoPedido TipoPedido required
+    classificacaoAparelho ClassificacaoAparelho
+}
+
+entity ArrCep {
+    cepnum String maxlength(8)
+    cependtip String maxlength(100)
+    cepend String maxlength(255)
+    cependcompl String maxlength(255)
+    cepbai String maxlength(255)
+    cepcid String maxlength(8)
+    cepmuncod Integer
+    cepmunnom String maxlength(100)
+    cepmunuf String maxlength(2)
+}
+
+enum TipoAtividadeNegocio {
+    LIGACAO
+    REUNIAO
+    TAREFA
+    EMAIL
+    MENSAGEM
+}
+
+enum ClassificacaoPotencialVenda {
+	V1
+}
+
+entity Negocio {
+    codigo Long required
+    dataCriacao Instant required
+    //usuario_criador_id
+    //filial_id
+    //consultor_id
+    //operadora_movel_atual_id
+    quantidadeLinhasVozMovelDesejadas Integer
+    quantidadeLinhasVozFixoDesejadas Integer
+    quantidadeLinhasDadosMoveisDesejadas Integer
+    quantidadeLinhasDadosFixoDesejadas Integer
+    dataVencimentoContratoOperadoraMovelAtual Integer
+    //etapa_funil_vendas_id
+    //cliente_id
+    nomePessoaContato String maxlength(255)
+    telefonePessoaContato String maxlength(11)
+    emailPessoaContato String maxlength(100)
+    quantidadePontosTvDesejados Integer
+    quantidadeLinhasOperadoraMovelAtual Integer
+    //operadora_fixa_atual_id
+    quantidadeLinhasOperadoraFixaAtual Integer
+    dataVencimentoContratoOperadoraFixaAtual Instant
+    valorEstimadoFaturaOperadoraFixaAtual BigDecimal
+    valorEstimadoFaturaOperadoraMovelAtual BigDecimal
+    titulo String maxlength(100)
+    //motivo_perda_negocio_id
+    observacao String maxlength(2500)
+    //licenca_id
+    arquivado Boolean required
+    dataUltimaAlteracaoEtapaFunilVendas Instant
+    //consultor_pos_venda_id
+    //motivo_arquivamento_negocio_id
+    dataUltimaAlteracaoAtividades Instant
+    //pedido_id
+    vendaPrevisivel Boolean required
+}
+
+relationship ManyToOne {
+	Negocio{usuarioCriador} to Usuario
+    Negocio{filial} to Filial
+    Negocio{consultor} to Usuario
+    Negocio{operadoraMovelAtual} to Operadora
+    Negocio{cliente} to Cliente
+    Negocio{operadoraFixaAtual} to Operadora
+    Negocio{motivoPerdaNegocio} to Motivo
+    Negocio{licenca} to Licenca
+    Negocio{consultorPosVenda} to Usuario
+    Negocio{motivoArquivamentoNegocio} to Motivo
+    Negocio{pedido} to Pedido
+}
+
+entity ItemProdutoNegocio {
+    //licenca_id
+    //negocio_id
+    //produto_negocio_id
+    quantidadeTotalItem Integer
+    receitaTotalItem BigDecimal
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+	ItemProdutoNegocio{licenca} to Licenca
+    ItemProdutoNegocio{negocio} to Negocio
+    ItemProdutoNegocio{produtoNegocio} to ProdutoNegocio
+    ItemProdutoNegocio{usuarioCriador} to Usuario
+}
+
+enum TipoNegociacaoPedido {
+    FRESH
+    BASE
+    MIGRACAO
+    MIGRACAO_UPGRADE
+    MIGRACAO_DOWNGRADE
+    TROCA
+    MIGRACAO_TROCA
+    MIGRACAO_TROCA_UPGRADE
+    MIGRACAO_TROCA_DOWNGRADE
+    ADICAO_SERVICO
+    TT
+    PP
+    PP_ENVIO_APARELHO
+    RENOVACAO
+    RENOVACAO_COM_DELTA
+    M2M
+    TOTALIZACAO
+}
+
+enum TipoModalidadeVendaAparelho {
+    VENDA_FACILITADA
+    COMODATO
+    INDEFINIDO
+}
+
+entity ItemPropostaNegocio {
+    //proposta_negocio_id
+    tipoItem TipoPedido required
+    tipoNegociacao TipoNegociacaoPedido required
+    ddd String maxlength(2) required
+    portabilidade Boolean required
+    quantidadeLinhas Integer required
+    //plano_id
+    //oferta_id
+    aparelhoValor BigDecimal
+    campanhaSiebel String  maxlength(50)
+    valor BigDecimal required
+    //usuario_criador_id
+    dataCriacao Instant required
+    //licenca_id
+    //aparelho_id
+    modalidadeVendaAparelho TipoModalidadeVendaAparelho
+    quantidadeParcelas Integer
+}
+
+relationship ManyToOne {
+	ItemPropostaNegocio{propostaNegocio} to PropostaNegocio
+    ItemPropostaNegocio{plano} to Plano
+    ItemPropostaNegocio{oferta} to Oferta
+    ItemPropostaNegocio{usuarioCriador} to Usuario
+    ItemPropostaNegocio{licenca} to Licenca
+    ItemPropostaNegocio{aparelho} to Aparelho
+}
+
+entity LinhaItemPropostaNegocio {
+    //item_proposta_negocio_id
+    //operadora_doadora_id
+    numero String maxlength(11)
+    numeroPortado String maxlength(11)
+    dataCriacao Instant required
+    //licenca_id
+}
+
+relationship ManyToOne {
+	LinhaItemPropostaNegocio{itemPropostaNegocio} to ItemPropostaNegocio
+    LinhaItemPropostaNegocio{operadoraDoadora} to Operadora
+    LinhaItemPropostaNegocio{licenca} to Licenca
+}
+
+entity ProcessoImportacaoClientes {
+
+}
+
+entity ErroProcessoImportacaoClientes {
+    //processo_importacao_clientes_id
+    linhaPlanilha Integer required
+    erro String maxlength(5000)
+    //licenca_id
+}
+
+relationship ManyToOne {
+	ErroProcessoImportacaoClientes{processoImportacaoClientesId} to ProcessoImportacaoClientes
+    ErroProcessoImportacaoClientes{licenca} to Licenca
+}
+
+entity Origem {
+
+}
+
+entity Cliente {
+    codigo Long required
+    //pessoa_id
+    //usuario_criador_id
+    dataCriacao Instant required
+    //consultor_id
+    //filial_id
+    nomeResponsavelPrincipal String maxlength(255)
+    telefone1ResponsavelPrincipal String maxlength(11)
+    telefone2ResponsavelPrincipal String maxlength(11)
+    emailResponsavelPrincipal String maxlength(100)
+    //operadora_movel_atual_id
+    quantidadeLinhasOperadoraMovelAtual Integer
+    valorEstimadoFaturaOperadoraMovelAtual BigDecimal
+    dataVencimentoContratoOperadoraMovelAtual Instant
+    dataInformacaoOperadoraMovelAtual Instant
+    //operadora_fixa_atual_id
+    quantidadeLinhasOperadoraFixaAtual Integer
+    valorEstimadoFaturaOperadoraFixaAtual BigDecimal
+    dataVencimentoContratoOperadoraFixaAtual Instant
+    dataInformacaoOperadoraFixaAtual Instant
+    //processo_importacao_clientes_id
+    //operadora_telefone1_responsavel_principal_id
+    //operadora_telefone2_responsavel_principal_id
+    cpfAdministrador String maxlength(11)
+    senhaVivo String maxlength(50)
+    telefoneAdministrador String maxlength(50)
+    //licenca_id
+    //processo_migracao_vivocorp_id
+    dataUltimaConsultaCoberturaFixa Integer
+    observacao String maxlength(2500)
+    //detentor_anexo_arquivo_id
+    //origem_id
+    //consultor_pos_venda_id
+    carteira String maxlength(100)
+    vinculoRegional String maxlength(50)
+    //adabas_id
+    dataUltimaConsultaDadosCadastraisVivoCorp Instant
+    dataUltimaConsultaCarteiraVivoCorp Instant
+    possuiPedidoMovel Boolean required
+    possuiPedidoFixaBasica Boolean required
+    possuiPedidoFixaAvancada Boolean required
+    possuiPedidoVivoTech Boolean required
+    possuiPedidoTi Boolean required
+    monitoradoCarteiraVivo Boolean required
+}
+
+relationship ManyToOne {
+	Cliente{pessoa} to Pessoa
+    Cliente{usuarioCriador} to Usuario
+    Cliente{consultor} to Usuario
+    Cliente{filial} to Filial
+    Cliente{processoImportacaoClientes} to ProcessoImportacaoClientes
+    Cliente{licenca} to Licenca
+    Cliente{detentorAnexoArquivo} to DetentorAnexoArquivo
+    Cliente{origem} to Origem
+    Cliente{consultorPosVenda} to Usuario
+}
+
+enum TipoContabilizacaoDashboardVendas {
+    DATA_CRIACAO
+    DATA_ATIVACAO
+    DATA_ULTIMA_MUDANCA_STATUS
+    DATA_NENHUMA
+}
+
+enum TipoClassificacaoDashboardVendas {
+    VENDIDO
+    CONCLUIDO
+    NENHUM
+}
+
+entity ConfiguracaoDashboardVendas {
+    //licenca_id
+    codigo Long required
+    tipoPedido TipoPedido required
+    descricaoLinha String maxlength(100) required
+    ordemExibicao Integer required
+    //usuario_criador_id
+    dataCriacao Instant required
+    tipoContabilizacao TipoContabilizacaoDashboardVendas required
+    legenda String maxlength(5000)
+    tipoClassificacao TipoClassificacaoDashboardVendas required
+}
+
+relationship ManyToOne {
+	ConfiguracaoDashboardVendas{licenca} to Licenca
+    ConfiguracaoDashboardVendas{usuarioCriador} to Usuario
+}
+
+entity ConfiguracaoDashboardVendasStatusPedido {
+	//licenca_id
+    //configuracao_dashboard_vendas_id
+    //status_pedido_id
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+	ConfiguracaoDashboardVendasStatusPedido{licenca} to Licenca
+    ConfiguracaoDashboardVendasStatusPedido{configuracaoDashboardVendas} to ConfiguracaoDashboardVendas
+    ConfiguracaoDashboardVendasStatusPedido{statusPedido} to StatusPedido
+    ConfiguracaoDashboardVendasStatusPedido{usuarioCriador} to Usuario
+}
+
+entity ConfiguracaoSistema {
+    //licenca_id
+    assuntoEmailProposta String maxlength(255)
+    corpoEmailProposta String maxlength(50000)
+    conteudoEmailProposta String maxlength(50000)
+    //detentor_anexo_arquivo_id
+    permitirTransferenciaPedidos Boolean required
+    loginWebvendas String maxlength(20)
+    senhaWebvendas String maxlength(50)
+    quantidadeThreadsProcessoConsultarCobertura Integer
+    sacPermitirInformarUsuarioExecutorCadastro Boolean required
+    sacPermitirAutoAtribuicaoUsuarioExecutor Boolean required
+    //status_pedido_movel_inicial_id
+    //status_personalizado_pedido_movel_inicial_id
+    //status_pedido_soho_inicial_id
+    //status_personalizado_pedido_soho_inicial_id
+    //status_pedido_sme_inicial_id
+    //status_personalizado_pedido_sme_inicial_id
+    //status_pedido_vsti_inicial_id
+    //status_personalizado_pedido_vsti_inicial_id
+    //status_pedido_ti_inicial_id
+    //status_personalizado_pedido_ti_inicial_id
+    enviarEmailSupervisorCadastroPedido Boolean required
+    enviarEmailSupervisorAlteracaoStatusPedido Boolean required
+    dataUltimaAlteracaoLoginSenhaWebvendas Instant
+    //usuario_ultima_alteracao_login_senha_webvendas_id
+    ipServidorConsultaCoberturaVivoFixa String maxlength(50)
+    portaServidorConsultaCoberturaVivoFixa String maxlength(50)
+}
+
+relationship ManyToOne {
+	ConfiguracaoSistema{licenca} to Licenca
+    ConfiguracaoSistema{detentorAnexoArquivo} to DetentorAnexoArquivo
+    ConfiguracaoSistema{statusPedidoMovelInicial} to StatusPedido
+    ConfiguracaoSistema{statusPersonalizadoPedidoMovelInicialId} to StatusPersonalizadoPedido
+    ConfiguracaoSistema{statusPedidoSohoInicial} to StatusPedido
+    ConfiguracaoSistema{statusPersonalizadoPedidoSohoInicialId} to StatusPersonalizadoPedido
+    ConfiguracaoSistema{statusPedidoSmeInicial} to StatusPedido
+    ConfiguracaoSistema{statusPersonalizadoPedidoSmeInicialId} to StatusPersonalizadoPedido
+    ConfiguracaoSistema{statusPedidoVstiInicial} to StatusPedido
+    ConfiguracaoSistema{statusPersonalizadoPedidoVstiInicialId} to StatusPersonalizadoPedido
+    ConfiguracaoSistema{statusPedidoTiInicial} to StatusPedido
+    ConfiguracaoSistema{statusPersonalizadoPedidoTiInicialId} to StatusPersonalizadoPedido
+    ConfiguracaoSistema{usuarioUltimaAlteracaoLoginSenhaWebvendasId} to Usuario
+}
+
+entity ConfiguracaoSistemaAnexoArquivoPrePedido {
+    //licenca_id
+    //configuracao_sistema_id
+    //tipo_de_documento_anexavel_id
+    dataCriacao Instant required
+    //usuario_criador_id
+    tipoPedido TipoPedido
+}
+
+relationship ManyToOne {
+	ConfiguracaoSistemaAnexoArquivoPrePedido{licenca} to Licenca
+    ConfiguracaoSistemaAnexoArquivoPrePedido{configuracaoSistemaId} to ConfiguracaoSistema
+    ConfiguracaoSistemaAnexoArquivoPrePedido{tipoDeDocumentoAnexavelId} to TipoDeDocumentoAnexavel
+    ConfiguracaoSistemaAnexoArquivoPrePedido{usuarioCriador} to Usuario
+}
+
+enum TipoContatoCliente {
+    SOCIO
+    CONTATO
+}
+
+entity ContatoCliente {
+    nomeCompleto String maxlength(200)
+    tipo TipoContatoCliente
+    cpfCnpj String maxlength(14)
+    telefoneCelular String maxlength(11)
+    telefoneFixo String maxlength(11)
+    //usuario_criador_id
+    //licenca_id
+    //cliente_id
+    dataCriacao Instant required
+    email String maxlength(100)
+}
+
+relationship ManyToOne {
+	ContatoCliente{usuarioCriador} to Usuario
+    ContatoCliente{licenca} to Licenca
+    ContatoCliente{cliente} to Cliente
+}
+
+entity AtividadeNegocio {
+    dataCriacao Instant required
+    //negocio_id
+    //usuario_criador_id
+    dataRealizacao Instant required
+    tipo TipoAtividadeNegocio
+    meAvise String maxlength(50)
+    isConcluida Boolean required
+    codigo Long required
+    //usuario_executor_id
+    dataConclusao Instant
+    //licenca_id
+    //evento_agenda_id
+    //cliente_id
+    classificacaoPotencialVenda ClassificacaoPotencialVenda
+}
+
+relationship ManyToOne {
+	AtividadeNegocio{negocio} to Negocio
+    AtividadeNegocio{usuarioCriador} to Usuario
+    AtividadeNegocio{usuarioExecutor} to Usuario
+    AtividadeNegocio{licenca} to Licenca
+    AtividadeNegocio{eventoAgenda} to EventoAgenda
+    AtividadeNegocio{cliente} to Cliente
+}
+
+entity Usuario {
+  	codigo Long required
+    dataCriacao Instant required
+    //licenca_id
+    //supervisor_id
+    //usuario_criador_id
+    senha String maxlength(70)
+    isAdmin Boolean required
+    isSuporte Boolean required
+    //pessoa_fisica_id
+    nomeExibicao String maxlength(70)
+    isConsultor Boolean required
+    isSupervisor Boolean required
+    isAtivo Boolean required
+    isAdministrativo Boolean required
+    ramal String maxlength(70)
+    contabilizarHorasCentral Boolean
+    receberEmails Boolean required
+    isEmailValido Boolean required
+    uuidEmail String maxlength(50)
+    email String maxlength(100)
+    isParceiro Boolean
+    isExecutorSac Boolean required
+    liberarHorarioFeriado Boolean
+    //horario_trabalho_id
+}
+
+relationship ManyToOne {
+	Usuario{licenca} to Licenca
+    Usuario{supervisor} to Usuario
+    Usuario{usuarioCriador} to Usuario
+    Usuario{pessoaFisica} to PessoaFisica
+    Usuario{horarioTrabalho} to HorarioTrabalho
+}
+
+entity UsuarioGrupoPermissoes {
+}
+
+entity UsuarioFilial {
+}
+
+entity UsuarioIpLiberado {
+}
+
+entity GrupoPermissoes {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(50) required
+}
+
+entity HistoricoEntidade {
+    //licenca_id
+    codigo Long required
+    //usuario_criador_id
+    dataCriacao Instant required
+    historico String maxlength(5000)
+}
+
+relationship ManyToOne {
+	HistoricoEntidade{licenca} to Licenca
+    HistoricoEntidade{usuarioCriador} to Usuario
+}
+
+entity IpLiberado {
+    codigo Long required
+    //usuario_criador_id
+    dataCriacao Instant required
+    ipLiberado String maxlength(15)
+    descricao String maxlength(70)
+    //licenca_id
+}
+
+relationship ManyToOne {
+    IpLiberado{licenca} to Licenca
+    IpLiberado{usuarioCriador} to Usuario
+}
+
+entity DetentorAnexoArquivo {
+	dataCriacao Instant required
+}
+
+entity AnexoArquivo {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    nomeNuvem String maxlength(255) required
+    nomeOriginal String maxlength(255)
+    tipoOrigemAnexoArquivo TipoOrigemAnexoArquivo
+}
+
+enum TipoOrigemAnexoArquivo {
+	CONFIGURACAO_SISTEMA
+    PROCESSO_IMPORTACAO_CLIENTES
+    PROCESSO_ATUALIZACAO_TELEFONES_CLIENTES
+    CLIENTES
+    SAC
+    PROCESSO_IMPORTACAO_LEAD
+    CONTESTACAO_LEAD
+    PEDIDOS
+    TRANSFERENCIA_CARTEIRA_CONSULTOR
+    ITEM_CORRECAO
+    NOTIFICACAO_GERAL
+    USUARIO_LOG_OPERACAO
+}
+
+entity TipoDeDocumentoAnexavel {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(50) required
+}
+
+entity Licenca {
+    dataCriacao Instant required
+    dataInicioUtilizacao Instant
+    dataInicioFaturamento Instant
+    dataPrimeiroVencimentoBoleto Instant
+    diaVencimentoBoleto Integer
+    //pessoa_id
+    produtosContratados String maxlength(300)
+    valoresNegociados String maxlength(300)
+    //pessoa_responsavel_id
+    //pessoa_financeiro_id
+    codigo Long
+    //usuario_suporte_id
+    //usuario_robo_id
+    contratacaoBloqueioIps Boolean required
+    contratacaoEmailProposta Boolean required
+    contratacaoCentralTelefonica Boolean required
+    //filial_padrao_id
+    contratacaoFinder Boolean required
+    //origem_cliente_finder_id
+    criarPedido Boolean
+    criarNegociacoes Boolean
+    sincronizarDadosCadastroCliente Boolean
+    sincronizarDadosCarteiraCliente Boolean
+    bloqueioAcesso Boolean required
+    dataBloqueioAcesso Instant required
+    motivoBloqueioAcesso String maxlength(2500)
+    mensagemBloqueioAcesso String maxlength(150)
+}
+
+relationship ManyToOne {
+    Licenca{pessoa} to Pessoa
+    Licenca{pessoaResponsavel} to PessoaFisica
+    Licenca{pessoaFinanceiro} to PessoaFisica
+    Licenca{usuarioSuporte} to Usuario
+    Licenca{usuarioRobo} to Usuario
+    Licenca{filialPadrao} to Filial
+    Licenca{origemClienteFinder} to Origem
+}
+
+entity LicencaStatusPedido {
+	dataCriacao Instant required
+    //usuario_criador_id
+    //licenca_id
+    //status_pedido_id
+}
+
+relationship ManyToOne {
+	LicencaStatusPedido{usuarioCriador} to Usuario
+    LicencaStatusPedido{licenca} to Licenca
+    LicencaStatusPedido{statusPedido} to StatusPedido
+}
+
+entity Endereco {
+	cep String maxlength(20)
+    logradouro String maxlength(100)
+    numero String maxlength(20)
+    bairro String maxlength(100)
+    complemento String maxlength(100)
+    pontoReferencia String maxlength(100)
+    cidade String maxlength(100)
+    uf String maxlength(2)
+}
+
+entity Operadora {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    ativo Boolean required
+}
+
+entity Pessoa {
+	email1 String maxlength(100)
+    telefone1 String maxlength(11)
+}
+
+entity PessoaFisica {
+	nomeCompleto String maxlength(100) required
+	cpf String maxlength(14)
+    rg String maxlength(15)
+    dataNascimento Instant
+}
+
+entity PessoaJuridica {
+	cnpj String maxlength(14)
+    razaoSocial String maxlength(200)
+    nomeFantasia String maxlength(200) required
+    codigoCnae String maxlength(50)
+    dataAbertura Instant
+    codigoCnaePrincipal String maxlength(50)
+    codigoNaturezaJuridica String maxlength(50)
+    quantidadeFuncionarios Integer
+}
+
+entity HorarioTrabalho {
+    //licenca_id
+    //usuario_criador_id
+    dataCriacao Instant required
+    codigo Long required
+    descricao String maxlength(255)
+}
+
+relationship ManyToOne {
+    HorarioTrabalho{licenca} to Licenca
+    HorarioTrabalho{usuarioCriador} to Usuario
+}
+
+entity HorarioTrabalhoPeriodo {
+	//licenca_id
+    //horario_trabalho_id
+    //usuario_criador_id
+    dataCriacao Instant required
+    diaDaSemana String maxlength(50)
+    periodo1inicio Instant
+    periodo1fim Instant
+    periodo2inicio Instant
+    periodo2fim Instant
+    periodo3inicio Instant
+    periodo3fim Instant
+    periodo4inicio Instant
+    periodo4fim Instant
+}
+
+relationship ManyToOne {
+    HorarioTrabalhoPeriodo{licenca} to Licenca
+    HorarioTrabalhoPeriodo{usuarioCriador} to Usuario
+    HorarioTrabalhoPeriodo{horarioTrabalho} to HorarioTrabalho
+}
+
+entity Imposto {
+    uf String maxlength(2)
+    fixaVoz BigDecimal
+    fixaDados BigDecimal
+    avancadaVoz BigDecimal
+    avancadaDados BigDecimal
+    vsti BigDecimal
+    ti BigDecimal
+    //licenca_id
+    //usuario_alteracao_id
+    dataAlteracao Instant required
+}
+
+relationship ManyToOne {
+	Imposto{licenca} to Licenca
+    Imposto{usuarioAlteracao} to Usuario
+}
+
+entity Origem {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    tipo TipoOrigem required
+}
+
+enum TipoOrigem {
+	CLIENTE, LEAD, MAILING
+}
+
+entity Filial {
+    //pessoa_id
+    //usuario_criador_id
+    dataCriacao Instant required
+    //licenca_id
+}
+
+relationship ManyToOne {
+    Filial{licenca} to Licenca
+    Filial{pessoa} to PessoaJuridica
+    Filial{usuarioCriador} to Usuario
+}
+
+entity Aparelho {
+	codigo String
+    dataCriacao Instant required
+    classificacaoAparelho ClassificacaoAparelho
+    descricao String required
+    nomeTecnico String required
+    material String
+    valor BigDecimal
+    ativo Boolean
+}
+
+enum ClassificacaoAparelho {
+	CHIP_MOVEL
+	APARELHO_MOVEL
+}
+
+entity ArrCep {
+	cepnum String maxlength(8) required
+    cependtip String maxlength(100)
+    cepend String maxlength(255)
+    cependcompl String maxlength(255)
+    cepbai String maxlength(255)
+    cepcid String maxlength(8)
+    cepmuncod Integer
+    cepmunnom String maxlength(100)
+    cepmunuf String maxlength(2)
+}
+
+entity Cor {
+	descricao String maxlength(50) required
+}
+
+enum TipoEvento {
+	ATIVIDADE_NEGOCIO
+}
+
+entity EventoAgenda {
+	descricao String maxlength(255) required
+    data Instant required
+    //usuario_criador_id
+    //usuario_responsavel_id
+    dataCriacao Instant required
+    //licenca_id
+    tipo TipoEvento
+}
+
+relationship ManyToOne {
+    EventoAgenda{licenca} to Licenca
+    EventoAgenda{usuarioCriador} to Usuario
+    EventoAgenda{usuarioResponsavel} to Usuario
+}
+
+entity Feriado {
+    //licenca_id
+    codigo Long required
+    data Instant required
+    nome String maxlength(50)
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+    Feriado{licenca} to Licenca
+    Feriado{usuarioCriador} to Usuario
+}
+
+entity Plano {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100) required
+    ativo Boolean required
+}
+
+entity Oferta {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    ativo Boolean required
+    valor BigDecimal required
+}
+
+entity OfertaServico {
+}
+
+entity Servico {
+	codigo Long
+    dataCriacao Instant required
+    descricao String maxlength(100)
+    ativo Boolean required
+    valor BigDecimal required
+}
+
+entity InformacaoAdicionalSac {
+    //sac_id
+    nome String maxlength(100) required
+    conteudo String maxlength(5000)
+    obrigatorio Boolean required
+    //usuario_criador_id
+    dataCriacao Instant required
+}
+
+relationship ManyToOne {
+	InformacaoAdicionalSac{sac} to Sac
+    InformacaoAdicionalSac{usuarioCriador} to Usuario
+}
